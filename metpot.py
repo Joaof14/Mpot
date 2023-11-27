@@ -11,3 +11,15 @@ yo = np.ones(n)
 zs = []
 
 
+def Pot(A, yo):
+    ys.append(yo)
+    autov = np.zeros()
+    for i in range(maxit):  
+        z = np.dot(A, ys[i])
+        
+        y = z/np.max(z)
+
+        ys.append(y)
+
+
+#Pot(A, yo)

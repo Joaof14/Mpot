@@ -9,17 +9,42 @@ maxit = 10000
 ys = []
 yo = np.ones(n)
 zs = []
-
+autovls = []
+p = 0.0000000000001
 
 def Pot(A, yo):
     ys.append(yo)
-    autov = np.zeros()
-    for i in range(maxit):  
+
+    i = 0
+    while i < maxit:  
         z = np.dot(A, ys[i])
+        zs.append(z)
+
+        if i > 0:
+            autovl = zs[-1]/ys[-1]
+            print(autovl)
+            autovls.append(autovl)
+            
+
+        if i > 1: 
+            err = (autovls[-1] - autovls[-2])/autovls[-1]
+            
+            err = np.abs(err)
+            mn = np.argmin(err)
+            resultado = autovl[mn]
+            print(resultado)
+            e = np.min(err)
+            if e < p:   
+                break
+
         
-        y = z/np.max(z)
-
+        
+        y = z/np.max(np.abs(z))
+        
         ys.append(y)
+        i+=1
+
+    print(i)
 
 
-#Pot(A, yo)
+Pot(A, yo)

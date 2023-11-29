@@ -58,6 +58,7 @@ def PotInv(A, y):
         x = retrosub(L,y,False)
         z = retrosub(U,x,True)
         zs.append(z)
+        i += 1
 
 
         if i > 0:
@@ -83,7 +84,8 @@ def PotInv(A, y):
 
         y = z/np.max(np.abs(z))
 
-        i+=1
+    print(i)
+        
 
     return
     

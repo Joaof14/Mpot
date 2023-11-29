@@ -1,17 +1,18 @@
 import numpy as np
-
-
+from dados import *
 #incialização
-A = np.array([[3,0,1], [2,2,2], [4,2,5]])
 
-n = A.shape[1]
-maxit = 10000
-ys = []
-yo = np.ones(n)
-zs = []
-autovls = []
-p = 0.0000000000001
 
+def LU(A):
+
+    L = np.identity(n)
+    U = np.zeros(A.shape)
+
+    for i in range(n):
+        for j in range(n):
+            pass
+           
+    return L, U
 def Pot(A, yo):
     ys.append(yo)
 
@@ -47,4 +48,12 @@ def Pot(A, yo):
     print(i)
 
 
-Pot(A, yo)
+
+def PotInv(A, yo):
+    L, U = LU(A)
+    return
+    
+
+#Pot(A, yo)
+
+PotInv(B, 0)

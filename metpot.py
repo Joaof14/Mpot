@@ -6,6 +6,10 @@ from aux import *
 
 
 def Pot(A, yo):
+    ys = []
+    zs = []
+    autovls = []
+
     ys.append(yo)
 
     i = 0
@@ -15,7 +19,6 @@ def Pot(A, yo):
 
         if i > 0:
             autovl = zs[-1]/ys[-1]
-            print(autovl)
             autovls.append(autovl)
             
 
@@ -42,6 +45,10 @@ def Pot(A, yo):
 
 
 def PotInv(A, y):
+    ys = []
+    zs = []
+    autovls = []
+
     L, U = LU(A)
     
 
@@ -55,7 +62,6 @@ def PotInv(A, y):
 
         if i > 0:
             autovl = zs[-1]/ys[-1]
-            print(autovl)
             autovls.append(autovl)
             
 
@@ -84,6 +90,8 @@ def PotInv(A, y):
 
 
 
-PotInv(B, yo)
-print("\n \n \n \n")
+
+
 Pot(A, yo)
+print("\n \n \n")
+PotInv(B, yo)

@@ -40,14 +40,48 @@ def Pot(A, yo):
     print(i)
 
 
-def PotInv(A, yo):
+def PotInv(A, y):
     L, U = LU(A)
     
+
     
+
+    i = 0
+    while i < maxit:
+        ys.append(y)  
+        x = retrosub(L,y,False)
+        z = retrosub(U,x,True)
+        zs.append(z)
+
+
+        if i > 0:
+            autovl = zs[-1]/ys[-1]
+            print(autovl)
+            autovls.append(autovl)
+            
+
+        if i > 1: 
+            err = (autovls[-1] - autovls[-2])/autovls[-1]
+            
+            err = np.abs(err)
+            mn = np.argmin(err)
+            resultado = autovl[mn]
+            print(resultado)
+            e = np.min(err)
+            if e < p:   
+                break
+
+
+
+
+        y = z/np.max(np.abs(z))
+
+        i+=1
+
     return
     
 
 
 
-PotInv(B, 0)
+PotInv(B, yo)
 #Pot(A, yo)

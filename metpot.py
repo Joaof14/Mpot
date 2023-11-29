@@ -25,9 +25,10 @@ def Pot(A, yo):
             err = np.abs(err)
             mn = np.argmin(err)
             resultado = autovl[mn]
-            print(resultado)
             e = np.min(err)
-            if e < p:   
+            if e < p:  
+                print(resultado)
+                print(y) 
                 break
 
         
@@ -42,8 +43,6 @@ def Pot(A, yo):
 
 def PotInv(A, y):
     L, U = LU(A)
-    
-
     
 
     i = 0
@@ -66,9 +65,11 @@ def PotInv(A, y):
             err = np.abs(err)
             mn = np.argmin(err)
             resultado = autovl[mn]
-            print(resultado)
             e = np.min(err)
-            if e < p:   
+            if e < p:  
+                print(resultado) 
+                print(1/resultado)
+                print(y)
                 break
 
 
@@ -84,4 +85,5 @@ def PotInv(A, y):
 
 
 PotInv(B, yo)
-#Pot(A, yo)
+print("\n \n \n \n")
+Pot(A, yo)

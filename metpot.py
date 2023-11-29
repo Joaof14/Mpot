@@ -93,5 +93,5 @@ def PotInv(A, y):
 
 
 Pot(A, yo)
-print("\n \n \n")
+print("\n")
 PotInv(B, yo)

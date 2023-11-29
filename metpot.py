@@ -1,18 +1,10 @@
 import numpy as np
-from dados import *
+from aux import *
 #incialização
 
 
-def LU(A):
 
-    L = np.identity(n)
-    U = np.zeros(A.shape)
 
-    for i in range(n):
-        for j in range(n):
-            pass
-           
-    return L, U
 def Pot(A, yo):
     ys.append(yo)
 
@@ -48,12 +40,14 @@ def Pot(A, yo):
     print(i)
 
 
-
 def PotInv(A, yo):
     L, U = LU(A)
+    
+    
     return
     
 
-#Pot(A, yo)
+
 
 PotInv(B, 0)
+#Pot(A, yo)

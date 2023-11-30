@@ -1,11 +1,14 @@
 import numpy as np
 from aux import *
-#incialização
+#importar arquivo auxiliar com dados sobre a aplicação, precisão, yo, e matrizes
 
 
 
 
 def Pot(A, yo):
+
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+
     ys = []
     zs = []
     autovls = []
@@ -13,29 +16,45 @@ def Pot(A, yo):
     ys.append(yo)
 
     i = 0
+
+    #iteração do método das potências
+
     while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
         z = np.dot(A, ys[i])
         zs.append(z)
+
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
 
         if i > 0:
             autovl = zs[-1]/ys[-1]
             autovls.append(autovl)
             
+        #calcular erro dos autovalores quando existem suficientes
 
         if i > 1: 
+
             err = (autovls[-1] - autovls[-2])/autovls[-1]
-            
             err = np.abs(err)
+
+            #armazenar resultado de menor erro
+
             mn = np.argmin(err)
             resultado = autovl[mn]
             e = np.min(err)
+
+            #critério de parada da precisão
+
             if e < p:  
                 print(resultado)
                 print(y) 
                 break
 
         
-        
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
         y = z/np.max(np.abs(z))
         
         ys.append(y)

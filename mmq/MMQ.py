@@ -48,7 +48,7 @@ def plotgrafico(dataframe, titulo, texto):
 def lin(x, y):
     df = formar_tabela(x,y)
 
-    #Transformações
+    #Transformações (g2 e gj)
 
     #Calculos de coeficientes
 
@@ -60,7 +60,7 @@ def lin(x, y):
 def logaritmo(x,y):
     df = formar_tabela(x,y)
 
-    #Transformações
+    #Transformações (g2 e gj)
 
     #Calculos de coeficientes
 
@@ -74,7 +74,7 @@ def logaritmo(x,y):
 def potencial(x,y): 
     df = formar_tabela(x,y)
 
-    #Transformações
+    #Transformações (g2 e gj)
 
     #Calculos de coeficientes
 
@@ -87,7 +87,7 @@ def potencial(x,y):
 def exponencial(x,y):
     df = formar_tabela(x,y)
 
-    #Transformações
+    #Transformações (g2 e gj)
 
     #Calculos de coeficientes
 
@@ -100,7 +100,7 @@ def exponencial(x,y):
 def geometrico(x,y):
     df = formar_tabela(x,y)
 
-    #Transformações
+    #Transformações (g2 e gj)
 
     #Calculos de coeficientes
 
@@ -113,7 +113,7 @@ def geometrico(x,y):
 def polinomial(x,y):
     df = formar_tabela(x,y)
 
-    #Transformações
+    #Transformações (g2 e gj)
 
     #Calculos de coeficientes
 

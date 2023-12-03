@@ -43,3 +43,20 @@ função que executa o método das potencias(yo, n, ac):
 
 
 qual o n, qual o m
+
+
+
+
+
+chamar potencia sem aceleração
+
+para aceleração em acelerações:
+    para n in range(10,50,5):
+        chamar potencia aceleração aitken com n
+        para m in range (10, 50, 5):
+            chamar potencia (aceleração de mmq, m, n):
+
+
+estudar somente mmq, com n qualquer, sem loop
+
+estudar aceleração mesclando mmq e aitken

@@ -5,7 +5,7 @@ from aux import *
 
 
 
-def Pot(A, yo):
+def Pot(A, yo, aceleracao):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
 
@@ -108,6 +108,9 @@ def PotInv(A, y):
 
     return
     
+
+def Aitken():
+    pass
 
 
 

@@ -109,7 +109,10 @@ def PotInv(A, y):
     return
     
 
-def Aitken():
+def Aitken(valores):
+    avAitken = valores
+
+
     pass
 
 

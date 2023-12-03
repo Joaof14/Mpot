@@ -117,8 +117,8 @@ def polinomial(x,y):
 
     #Calculos de coeficientes
 
-    #Calculo r2
-
+    #Calculo r2  
+   
     #Conversão dos coeficientes (se necessário)
 
     #Gráficos

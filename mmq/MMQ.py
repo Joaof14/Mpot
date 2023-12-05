@@ -45,73 +45,104 @@ def calcula_r2(dataframe, a , b):
 def plotgrafico(dataframe, titulo, texto):
     pass
 
+
+    #formar tabela
 def lin(x, y):
     df = formar_tabela(x,y)
-
-    #Transformações (g2 e gj)
-
+    df["g"] = df["g"] 
+    df["j"] = df["j"]
+    df["gj"] = df["g"] * df["j"]
+    df["g2"] = df["g"] * df["g"]
+    
     #Calculos de coeficientes
-
+    a, b = calcula_reg(df)
     #Calculo r2
-
+    r2 = calcula_r2(df, a, b)
+    #criar return
+    atv = a*x + b
     #Gráficos
+   
+    #criar file text
 
-
+    # formar tabela log
 def logaritmo(x,y):
     df = formar_tabela(x,y)
-
-    #Transformações (g2 e gj)
-
+    df["g"] = np.log(df["g"]) 
+    df["j"] = df["j"]
+    df["gj"] = df["g"] * df["j"]
+    df["g2"] = df["g"] * df["g"]
+    
     #Calculos de coeficientes
-
+    a, b = calcula_reg(df)
     #Calculo r2
-
-    #Conversão dos coeficientes (se necessário)
-
+    r2 = calcula_r2(df, a, b)
+    #criar return
+    atv = a*np.log(x) + b
     #Gráficos
-
+    
+    #criar file text
 
 def potencial(x,y): 
     df = formar_tabela(x,y)
-
-    #Transformações (g2 e gj)
-
+    df["g"] = np.log(df["g"])
+    df["j"] = np.log(df["j"])
+    df["gj"] = df["g"] * df["j"]
+    df["g2"] = df["g"] * df["g"]
     #Calculos de coeficientes
-
+    a, b = calcula_reg(df)
     #Calculo r2
-
-    #Conversão dos coeficientes (se necessário)
-
+    r2 = calcula_r2(df, a, b)
+    #criar return
+    atv = b*x**a
+    #Conversão dos coeficientes
+    b = np.exp(b)
     #Gráficos
+    #criar file text
 
 def exponencial(x,y):
     df = formar_tabela(x,y)
-
+    df["j"] = np.log(df["j"])
+    df["g"] = df["g"] 
+    df["gj"] = df["g"] * df["j"]
+    df["g2"] = df["g"] * df["g"]
+    
     #Transformações (g2 e gj)
 
     #Calculos de coeficientes
-
+    a, b = calcula_reg(df)
     #Calculo r2
-
+    r2 = calcula_r2(df, a, b)
+    #criar return
+    atv = b*np.exp(a*x)
     #Conversão dos coeficientes (se necessário)
-
+    b = np.exp(b)
     #Gráficos
+    
+    #criar file text
 
 def geometrico(x,y):
     df = formar_tabela(x,y)
+    df["j"] = np.log(df["j"])
+    df["g"] = df["g"]
+    df["gj"] = df["g"] * df["j"]
+    df["g2"] = df["g"] * df["g"]
 
-    #Transformações (g2 e gj)
-
+    
     #Calculos de coeficientes
-
+    a, b = calcula_reg(df)
     #Calculo r2
-
+    r2 = calcula_r2(df, a, b)
     #Conversão dos coeficientes (se necessário)
-
+    a = np.exp(a)
+    b = np.exp(b)
     #Gráficos
+    #criar return
+    atv = b*a**x
+    #criar file text
 
-def polinomial(x,y):
+def polinomial(x,y,grau = 2):
     df = formar_tabela(x,y)
+    
 
     #Transformações (g2 e gj)
 

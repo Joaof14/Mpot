@@ -1,11 +1,11 @@
 import numpy as np
-from aux import *
+from lerMatriz import *
 #importar arquivo auxiliar com dados sobre a aplicação, precisão, yo, e matrizes
 
 
 
 
-def Pot(A, yo, aceleracao):
+def Pot(A, yo):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
 
@@ -49,7 +49,6 @@ def Pot(A, yo, aceleracao):
 
             if e < p:  
                 print(resultado)
-                print(y) 
                 break
 
         
@@ -63,7 +62,7 @@ def Pot(A, yo, aceleracao):
     print(i)
 
 
-def PotInv(A, y):
+"""def PotInv(A, y):
     ys = []
     zs = []
     autovls = []
@@ -107,7 +106,7 @@ def PotInv(A, y):
         
 
     return
-    
+    """
 
 def Aitken(valores):
     avAitken = valores
@@ -120,5 +119,4 @@ def Aitken(valores):
 
 
 Pot(A, yo)
-print("\n")
-PotInv(B, yo)
+

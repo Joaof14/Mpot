@@ -5,17 +5,18 @@ from lerMatriz import *
 
 
 
-def Pot(A, yo, acel = None):
+def Pot(A, yo, maxit = 10000,
+p = 0.0000000001, acel = None):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
     global ys, zs, autovls, erros, resultados, autovalor
-    ys = []
+    ys = [yo]
     zs = []
     autovls = []
     erros = []
     resultados = []
 
-    ys.append(yo)
+
 
     i = 0
 

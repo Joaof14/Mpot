@@ -7,6 +7,4 @@ matriz.A
 A = np.array(matriz.A)
 #A = np.array([[3,0,1], [2,2,2], [4,2,5]], dtype=float)
 n = A.shape[1]
-maxit = 10000
-p = 0.0000000001
 yo = np.ones(n)

@@ -5,14 +5,15 @@ from lerMatriz import *
 
 
 
-def Pot(A, yo):
+def Pot(A, yo, acel = None):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
-    global ys, zs, autovls, erros, resultado
+    global ys, zs, autovls, erros, resultados, autovalor
     ys = []
     zs = []
     autovls = []
     erros = []
+    resultados = []
 
     ys.append(yo)
 
@@ -37,19 +38,17 @@ def Pot(A, yo):
 
             if i > 1: 
 
-                err = (autovls[-1] - autovls[-2])/autovls[-1]
-                err = np.abs(err)
+                err = np.abs(autovls[-1] - autovls[-2]) / np.max(np.abs( autovls[-1] ))
                 
                 #armazenar resultado de menor erro
 
                 mn = np.argmin(err)
-                resultado = autovl[mn]
+                resultados.append(autovl[mn])
                 e = np.min(err)
                 erros.append(e)
                 #critério de parada da precisão
 
                 if e < p:  
-                    print(resultado)
                     break
 
         
@@ -59,8 +58,62 @@ def Pot(A, yo):
         
         ys.append(y)
         i+=1
+        
+    autovalor = resultados[-1] 
+    print("iterações: ",i)
+    print("erro: ", e)
+    print("autovalor: ", autovalor)
 
-    print(i)
+
+
+def Aitken(valores):
+    avAitken = valores
+
+
+    pass
+
+
+
+
+
+Pot(A, yo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """def PotInv(A, y):
@@ -108,16 +161,3 @@ def Pot(A, yo):
 
     return
     """
-
-def Aitken(valores):
-    avAitken = valores
-
-
-    pass
-
-
-
-
-
-Pot(A, yo)
-

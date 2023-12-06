@@ -2,11 +2,11 @@ import scipy
 from io import StringIO
 import numpy as np
 
-matriz = scipy.io.mmread("matrizes/bcsstk05.mtx")
+matriz = scipy.io.mmread("matrizes/bcsstk01.mtx")
 matriz.A
 A = np.array(matriz.A)
 #A = np.array([[3,0,1], [2,2,2], [4,2,5]], dtype=float)
 n = A.shape[1]
 maxit = 10000
-p = 0.000000000001
+p = 0.0000000001
 yo = np.ones(n)

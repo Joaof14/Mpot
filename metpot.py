@@ -1,12 +1,11 @@
 import numpy as np
-from lerMatriz import *
-#importar arquivo auxiliar com dados sobre a aplicação, precisão, yo, e matrizes
+
 
 
 
 
 def Pot(A, yo, maxit = 10000,
-p = 0.0000000001, acel = None):
+p = 0.0001, acel = None):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
     global ys, zs, autovls, erros, resultados, autovalor
@@ -77,7 +76,7 @@ def Aitken(valores):
 
 
 
-Pot(A, yo)
+
 
 
 

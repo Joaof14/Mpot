@@ -60,9 +60,7 @@ p = 0.0001, acel = None):
         i+=1
         
     autovalor = resultados[-1] 
-    print("iterações: ",i)
-    print("erro: ", e)
-    print("autovalor: ", autovalor)
+    return [i, e, autovalor]
 
 
 

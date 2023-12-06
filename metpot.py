@@ -1,14 +1,14 @@
 import numpy as np
-
+#from lerMatriz import *
 
 
 
 
 def Pot(A, yo, maxit = 10000,
-p = 0.0001, acel = None):
+p = 0.0000000001, acel = None):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
-    global ys, zs, autovls, erros, resultados, autovalor
+    #global ys, zs, autovls, erros, resultados, autovalor
     ys = [yo]
     zs = []
     autovls = []
@@ -62,27 +62,13 @@ p = 0.0001, acel = None):
     autovalor = resultados[-1] 
     return [i, e, autovalor]
 
-
+#Pot(A, yo)
 
 def Aitken(valores):
     avAitken = valores
 
 
     pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

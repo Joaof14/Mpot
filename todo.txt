@@ -1,5 +1,5 @@
-estudar aitken de novo
-procurar referencias
+
 implementar aitken 
-ajustar e implementar mmq
-reunião segunda
+ajustar e implementar mmq polinomial
+integrar com mmq
+reunião terça e quinta a respeito dos códigos

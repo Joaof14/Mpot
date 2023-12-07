@@ -12,12 +12,15 @@ caminho = 'matrizes/'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 coluna_nomes = []
+coluna_acelera = []
 coluna_ordem = []
 coluna_campo = []
 coluna_simetria = []
 coluna_ite = []
 coluna_autovalor = []
 coluna_erro = []
+
+acels = ['Nenhuma', 'MMQ_Linear', 'MMQ_Logaritmo', 'MMQ_Exponencial', 'MMQ_Potencial', 'MMQ_Geometrico']
 
 for arquivo in arquivos_na_pasta:
     ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
@@ -27,10 +30,12 @@ for arquivo in arquivos_na_pasta:
     n = A.shape[1]
     yo = np.ones(n)
     
+    #for ac in acls:
     coluna_nomes.append(arquivo)
     coluna_ordem.append(ordem)
     coluna_campo.append(campo)
     coluna_simetria.append(simetria)
+    #coluna_metodo.append(ac)
     
     try:
         i, e, autovalor= Pot(A, yo)
@@ -45,6 +50,7 @@ for arquivo in arquivos_na_pasta:
 
 dados = {
     'Matriz': coluna_nomes,
+    #'Acekeração': coluna_acelera,
     'Autovalor': coluna_autovalor,
     'Iterações': coluna_ite,
     'Erros': coluna_erro,

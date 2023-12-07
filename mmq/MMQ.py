@@ -63,6 +63,7 @@ def lin(x, y):
     #Gráficos
    
     #criar file text
+    return atv
 
     # formar tabela log
 def logaritmo(x,y):
@@ -81,6 +82,7 @@ def logaritmo(x,y):
     #Gráficos
     
     #criar file text
+    return atv
 
 def potencial(x,y): 
     df = formar_tabela(x,y)
@@ -97,7 +99,9 @@ def potencial(x,y):
     #Conversão dos coeficientes
     b = np.exp(b)
     #Gráficos
+    
     #criar file text
+    return atv
 
 def exponencial(x,y):
     df = formar_tabela(x,y)
@@ -119,6 +123,7 @@ def exponencial(x,y):
     #Gráficos
     
     #criar file text
+    return atv
 
 def geometrico(x,y):
     df = formar_tabela(x,y)
@@ -139,6 +144,7 @@ def geometrico(x,y):
     #criar return
     atv = b*a**x
     #criar file text
+    return atv
 
 def polinomial(x,y,grau = 2):
     df = formar_tabela(x,y)

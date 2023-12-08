@@ -5,8 +5,8 @@ from mmq.MMQ import *
 
 
 
-def Pot(A, yo, maxit = 10000,
-p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
+def metodo_das_potencias(A, yo, maxit = 10000,
+p = 0.00001, acel = 'Nenhuma', inicio_acel = 10):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
     #global ys, zs, autovls, erros, resultados, autovalor
@@ -14,11 +14,11 @@ p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
     zs = []
     autovls = []
     erros = []
-    resultados = []
+    
 
 
 
-    i = 0
+    i = 1
 
     #iteração do método das potências
 
@@ -28,71 +28,61 @@ p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
 
         z = np.dot(A, ys[i])
         zs.append(z)
+        y = z/np.linalg.norm(z)
+        ys.append(y)
 
         #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
 
         if i > 0:
             
             if i < inicio_acel or acel == 'Nenhuma':
-                autovl = zs[-1]/ys[-1]
+                autovl = np.linalg.norm(z)
                 autovls.append(autovl)
             
             
             #calcular erro dos autovalores quando existem suficientes
 
-                if i > 1: 
+            elif acel == 'MMQ_Linear' and i > inicio_acel:
     
-                    err = np.abs(autovls[-1] - autovls[-2]) / np.max(np.abs( autovls[-1] ))
-                    
-                    #armazenar resultado de menor erro
-    
-                    mn = np.argmin(err)
-                    resultados.append(autovl[mn])
-                    e = np.min(err)
-                    erros.append(e)
-                    #critério de parada da precisão
-                    if e < p:
-                        break
-        y = z/np.max(np.abs(z))
-       
-        ys.append(y)
-        i+=1
-       
-    autovalor = resultados[-1] 
-    return [i, e, autovalor]         
-        
-
-
-"""
-            else:
-                
-                if acel == 'MMQ_Linear' and i > inicio_acel:
-                    resultado = lin(x = np.arange(1, i+1 ), y = resultados)
                 pass
             
-                elif acel == 'MMQ_Logaritmo'and i > inicio_acel:
-                    pass
+            elif acel == 'MMQ_Logaritmo'and i > inicio_acel:
+                    
+                pass
                 
-                elif acel == 'MMQ_Exponencial' and i > inicio_acel:
-                    pass
+            elif acel == 'MMQ_Exponencial' and i > inicio_acel:
+                    
+                pass
                 
-                elif acel == 'MMQ_Potencial' and i > inicio_acel:
-                    pass
+            elif acel == 'MMQ_Potencial' and i > inicio_acel:
+                    
+                pass
                 
-                elif acel == 'MMQ_Geometrico' and i > inicio_acel:
-                    pass
+            elif acel == 'MMQ_Geometrico' and i > inicio_acel:
+                   
+                pass
                 
-                resultados.append(resultado)
-                e = resultados[-1] - resultados[-2] / resultados[-1]
-                erros.append(e)
-                """
                 
+                
+                
+            if i > 1: 
+
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
                
             
 
         #Cálculo de y com base no valor de z, tornando o vetor normalizado
 
+    
+        i+=1
         
+    autovalor = resultados[-1] 
+    return [i, erro, autovalor]
 
 #Pot(A, yo)
 

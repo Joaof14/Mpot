@@ -1,7 +1,8 @@
+import numpy as np
+from metpot import *
+
 import scipy
 from io import StringIO
-import numpy as np
-from metpot import Pot
 import os
 import glob
 import pandas as pd
@@ -30,27 +31,27 @@ for arquivo in arquivos_na_pasta:
     n = A.shape[1]
     yo = np.ones(n)
     
-    #for ac in acls:
-    coluna_nomes.append(arquivo)
-    coluna_ordem.append(ordem)
-    coluna_campo.append(campo)
-    coluna_simetria.append(simetria)
-    #coluna_metodo.append(ac)
-    
-    try:
-        i, e, autovalor= Pot(A, yo)
-        coluna_ite.append(i)
-        coluna_autovalor.append(autovalor)
-        coluna_erro.append(e)
+    for ac in acels:
+        coluna_nomes.append(arquivo)
+        coluna_ordem.append(ordem)
+        coluna_campo.append(campo)
+        coluna_simetria.append(simetria)
+        coluna_acelera.append(ac)
         
-    except:
-        coluna_ite.append('erro no calculo')
-        coluna_autovalor.append('erro no calculo')
-        coluna_erro.append('erro no calculo')
+        try:
+            i, e, autovalor= metodo_das_potencias(A, yo, acel = ac)
+            coluna_ite.append(i)
+            coluna_autovalor.append(autovalor)
+            coluna_erro.append(e)
+            
+        except:
+            coluna_ite.append('erro no calculo')
+            coluna_autovalor.append('erro no calculo')
+            coluna_erro.append('erro no calculo')
 
 dados = {
     'Matriz': coluna_nomes,
-    #'Acekeração': coluna_acelera,
+    'Aceleração': coluna_acelera,
     'Autovalor': coluna_autovalor,
     'Iterações': coluna_ite,
     'Erros': coluna_erro,
@@ -59,6 +60,6 @@ dados = {
     'Simetria': coluna_simetria
 }
 
-df = pd.DataFrame( dados )
+df1 = pd.DataFrame( dados )
 
 

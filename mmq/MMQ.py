@@ -47,10 +47,8 @@ def plotgrafico(dataframe, titulo, texto):
 
 
     #formar tabela
-def lin(x, y):
+def lin(x, y, pt):
     df = formar_tabela(x,y)
-    df["g"] = df["g"] 
-    df["j"] = df["j"]
     df["gj"] = df["g"] * df["j"]
     df["g2"] = df["g"] * df["g"]
     
@@ -59,17 +57,16 @@ def lin(x, y):
     #Calculo r2
     r2 = calcula_r2(df, a, b)
     #criar return
-    atv = a*x + b
+    atv = a*pt + b
     #Gráficos
    
     #criar file text
     return atv
 
     # formar tabela log
-def logaritmo(x,y):
+def logaritmo(x,y, pt):
     df = formar_tabela(x,y)
     df["g"] = np.log(df["g"]) 
-    df["j"] = df["j"]
     df["gj"] = df["g"] * df["j"]
     df["g2"] = df["g"] * df["g"]
     
@@ -78,13 +75,13 @@ def logaritmo(x,y):
     #Calculo r2
     r2 = calcula_r2(df, a, b)
     #criar return
-    atv = a*np.log(x) + b
+    atv = a*np.log(pt) + b
     #Gráficos
     
     #criar file text
     return atv
 
-def potencial(x,y): 
+def potencial(x,y,pt): 
     df = formar_tabela(x,y)
     df["g"] = np.log(df["g"])
     df["j"] = np.log(df["j"])
@@ -95,7 +92,7 @@ def potencial(x,y):
     #Calculo r2
     r2 = calcula_r2(df, a, b)
     #criar return
-    atv = b*x**a
+    atv = b*pt**a
     #Conversão dos coeficientes
     b = np.exp(b)
     #Gráficos
@@ -103,10 +100,9 @@ def potencial(x,y):
     #criar file text
     return atv
 
-def exponencial(x,y):
+def exponencial(x,y, pt):
     df = formar_tabela(x,y)
     df["j"] = np.log(df["j"])
-    df["g"] = df["g"] 
     df["gj"] = df["g"] * df["j"]
     df["g2"] = df["g"] * df["g"]
     
@@ -117,7 +113,7 @@ def exponencial(x,y):
     #Calculo r2
     r2 = calcula_r2(df, a, b)
     #criar return
-    atv = b*np.exp(a*x)
+    atv = b*np.exp(a*pt)
     #Conversão dos coeficientes (se necessário)
     b = np.exp(b)
     #Gráficos
@@ -125,10 +121,9 @@ def exponencial(x,y):
     #criar file text
     return atv
 
-def geometrico(x,y):
+def geometrico(x,y, pt):
     df = formar_tabela(x,y)
     df["j"] = np.log(df["j"])
-    df["g"] = df["g"]
     df["gj"] = df["g"] * df["j"]
     df["g2"] = df["g"] * df["g"]
 
@@ -142,7 +137,7 @@ def geometrico(x,y):
     b = np.exp(b)
     #Gráficos
     #criar return
-    atv = b*a**x
+    atv = b*a**pt
     #criar file text
     return atv
 

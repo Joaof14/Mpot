@@ -6,12 +6,11 @@ from mmq.MMQ import *
 
 
 def metodo_das_potencias(A, yo, maxit = 10000,
-p = 0.00001, acel = 'Nenhuma', inicio_acel = 10):
+p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
     #global ys, zs, autovls, erros, resultados, autovalor
-    ys = [yo]
-    zs = []
+    y = yo
     autovls = []
     erros = []
     
@@ -26,18 +25,17 @@ p = 0.00001, acel = 'Nenhuma', inicio_acel = 10):
 
         #Cálculo de Z com base no valor anterior de y
 
-        z = np.dot(A, ys[i])
-        zs.append(z)
+        z = np.dot(A, y)
+        
         y = z/np.linalg.norm(z)
-        ys.append(y)
-
+        
         #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
 
         if i > 0:
             
             if i < inicio_acel or acel == 'Nenhuma':
-                autovl = np.linalg.norm(z)
-                autovls.append(autovl)
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
             
             
             #calcular erro dos autovalores quando existem suficientes
@@ -81,7 +79,6 @@ p = 0.00001, acel = 'Nenhuma', inicio_acel = 10):
     
         i+=1
         
-    autovalor = resultados[-1] 
     return [i, erro, autovalor]
 
 #Pot(A, yo)

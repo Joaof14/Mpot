@@ -34,6 +34,39 @@ for arquivo in arquivos_na_pasta:
     yo = np.ones(n)
     
     for ac in acels:
+        if acel == 'Nenhuma':
+            
+            i, e, autovalor= metodo_das_potencias(A, yo, acel=ac)
+        
+        elif acel  == 'Aitken':
+            
+            i, e, autovalor= metodo_das_potencias(A, yo, acel=ac)
+            
+            pass
+             
+        elif acel == 'MMQ_Linear' a:
+
+            pass
+        
+        elif acel == 'MMQ_Logaritmo':
+                
+            pass
+            
+        elif acel == 'MMQ_Exponencial':
+                
+            pass
+            
+        elif acel == 'MMQ_Potencial' :
+                
+            pass
+            
+        elif acel == 'MMQ_Geometrico':
+               
+            pass
+        
+        elif acel == 'MMQ_Geometrico':
+            
+        
         coluna_nomes.append(arquivo)
         coluna_ordem.append(ordem)
         coluna_campo.append(campo)
@@ -41,7 +74,7 @@ for arquivo in arquivos_na_pasta:
         coluna_acelera.append(ac)
         
         
-        i, e, autovalor= metodo_das_potencias(A, yo, acel=ac)
+        
         coluna_ite.append(i)
         coluna_autovalor.append(autovalor)
         coluna_erro.append(e)

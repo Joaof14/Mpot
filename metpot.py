@@ -1,12 +1,12 @@
 import numpy as np
-from mmq.MMQ import *
+
 #from lerMatriz import *
 
 
 
 
-def metodo_das_potencias(A, yo, maxit = 10000,
-p = 0.00001):
+def metodo_da_potencia(A, yo, maxit = 10000,
+p = 0.0000000001):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
     #global ys, zs, autovls, erros, resultados, autovalor
@@ -59,7 +59,7 @@ p = 0.00001):
 #Pot(A, yo)
 
 def Aitken(A, yo, maxit = 10000,
-p = 0.00001, inicio_acel = 10):
+p = 0.0000000001, inicio_acel = 10):
 
     
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
@@ -97,11 +97,11 @@ p = 0.00001, inicio_acel = 10):
             autovls.append(autovalor)
                 
             if i > 1: 
-                if acel != "Aitken" or i <= maxit:
+                if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
                     erros.append(erro)
                 else:
-                    erro = np.abs(atk_Autovls[-1] - akt_Autovls[-2]) / np.abs(atk_Autovls[-1])
+                    erro = np.abs(atk_Autovls[-1] - atk_Autovls[-2]) / np.abs(atk_Autovls[-1])
                     erros.append(erro)
                     autovalor 
                 
@@ -121,13 +121,41 @@ p = 0.00001, inicio_acel = 10):
     pass
 
 
+def mp_mmq_linear(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
 
 
 
+def mp_mmq_logaritmo(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
 
 
 
+def mp_mmq_potencial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
 
+
+def mp_mmq_exponencial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
+
+
+def mp_mmq_potencial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
+
+
+def mp_mmq_geometrico(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
+
+
+def mp_mmq_polinomial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 10):
+    pass
 
 
 

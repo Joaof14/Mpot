@@ -1,5 +1,5 @@
 import numpy as np
-from metpot import *
+from metpot import metodo_da_potencia, Aitken
 
 
 import scipy
@@ -23,7 +23,18 @@ coluna_autovalor = []
 coluna_erro = []
 
 #acels = ['Nenhuma', 'MMQ_Linear', 'MMQ_Logaritmo', 'MMQ_Exponencial', 'MMQ_Potencial', 'MMQ_Geometrico', 'MMQ_Polinomial']
-acels = ['Nenhuma', 'Aitken']
+
+acels = {'Nenhuma': metodo_da_potencia, 
+         'Aitken': Aitken
+         #'MMQ_Linear': ,
+         #'MMQ_Logaritmo': ,
+         #'MMQ_Exponencial': ,
+         #'MMQ_Potencial': ,
+         #'MMQ_Geometrico': ,
+         #'MMQ_Polinomial': ,
+         }
+
+
 
 for arquivo in arquivos_na_pasta:
     ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
@@ -33,47 +44,17 @@ for arquivo in arquivos_na_pasta:
     n = A.shape[1]
     yo = np.ones(n)
     
-    for ac in acels:
-        if acel == 'Nenhuma':
-            
-            i, e, autovalor= metodo_das_potencias(A, yo, acel=ac)
-        
-        elif acel  == 'Aitken':
-            
-            i, e, autovalor= metodo_das_potencias(A, yo, acel=ac)
-            
-            pass
-             
-        elif acel == 'MMQ_Linear' a:
-
-            pass
-        
-        elif acel == 'MMQ_Logaritmo':
-                
-            pass
-            
-        elif acel == 'MMQ_Exponencial':
-                
-            pass
-            
-        elif acel == 'MMQ_Potencial' :
-                
-            pass
-            
-        elif acel == 'MMQ_Geometrico':
-               
-            pass
-        
-        elif acel == 'MMQ_Geometrico':
+    
+    for acel, metodo in acels.items():
             
         
         coluna_nomes.append(arquivo)
         coluna_ordem.append(ordem)
         coluna_campo.append(campo)
         coluna_simetria.append(simetria)
-        coluna_acelera.append(ac)
+        coluna_acelera.append(acel)
         
-        
+        i, e, autovalor = metodo(A, yo)
         
         coluna_ite.append(i)
         coluna_autovalor.append(autovalor)

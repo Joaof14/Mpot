@@ -6,14 +6,14 @@ from mmq.MMQ import *
 
 
 def metodo_das_potencias(A, yo, maxit = 10000,
-p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
+p = 0.00001, acel = 'Nenhuma', inicio_acel = 10):
 
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
     #global ys, zs, autovls, erros, resultados, autovalor
     y = yo
     autovls = []
     erros = []
-    
+    atk_Autovls = []
 
 
 
@@ -35,10 +35,16 @@ p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
             
             if i < inicio_acel or acel == 'Nenhuma':
                 autovalor = np.linalg.norm(z)
-                autovls.append(autovalor)
+                
             
             
-            #calcular erro dos autovalores quando existem suficientes
+            elif acel == 'Aitken':
+                
+                autovalor = np.linalg.norm(z)
+                
+                
+                atk_Autovalor = autovls[-2] - ((autovls[-1] - autovls[-2])**2) / (autovalor - 2 * autovls[-1] + autovls[-2])
+                atk_Autovls.append(atk_Autovalor)
 
             elif acel == 'MMQ_Linear' and i > inicio_acel:
     
@@ -60,13 +66,16 @@ p = 0.0000000001, acel = 'Nenhuma', inicio_acel = 10):
                    
                 pass
                 
-                
-                
+            autovls.append(autovalor)
                 
             if i > 1: 
-
-                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
-                erros.append(erro)
+                if acel != "Aitken" or i <= maxit:
+                    erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                    erros.append(erro)
+                else:
+                    erro = np.abs(atk_Autovls[-1] - akt_Autovls[-2]) / np.abs(atk_Autovls[-1])
+                    erros.append(erro)
+                    autovalor 
                 
                 #critério de parada da precisão
                 if erro < p:

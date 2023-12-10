@@ -26,11 +26,11 @@ coluna_erro = []
 
 acels = {'Nenhuma': metodo_da_potencia, 
          'Aitken': Aitken,
-         'MMQ_Linear': mp_mmq_linear,
-         'MMQ_Logaritmo': mp_mmq_logaritmo ,
-         'MMQ_Exponencial': mp_mmq_exponencial ,
-         'MMQ_Potencial': mp_mmq_potencial ,
-         'MMQ_Geometrico': mp_mmq_geometrico ,
+         #'MMQ_Linear': mp_mmq_linear,
+         #'MMQ_Logaritmo': mp_mmq_logaritmo ,
+         #'MMQ_Exponencial': mp_mmq_exponencial ,
+         #'MMQ_Potencial': mp_mmq_potencial ,
+         #'MMQ_Geometrico': mp_mmq_geometrico ,
          #'MMQ_Polinomial': mp_mmq_polinomial ,
          }
 

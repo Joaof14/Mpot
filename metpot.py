@@ -1,5 +1,5 @@
 import numpy as np
-
+from mmq.MMQ import *
 #from lerMatriz import *
 
 
@@ -13,7 +13,7 @@ p = 0.0000000001):
     y = yo
     autovls = []
     erros = []
-    atk_Autovls = []
+    ac_Autovls = []
 
 
 
@@ -59,7 +59,7 @@ p = 0.0000000001):
 #Pot(A, yo)
 
 def Aitken(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
+p = 0.0000000001, inicio_acel = 5):
 
     
     #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
@@ -67,7 +67,7 @@ p = 0.0000000001, inicio_acel = 10):
     y = yo
     autovls = []
     erros = []
-    atk_Autovls = []
+    ac_Autovls = []
 
 
 
@@ -90,8 +90,8 @@ p = 0.0000000001, inicio_acel = 10):
             autovalor = np.linalg.norm(z)
                 
             if i >= inicio_acel:
-                atk_Autovalor = autovls[-2] - ((autovls[-1] - autovls[-2])**2) / (autovalor - 2 * autovls[-1] + autovls[-2])
-                atk_Autovls.append(atk_Autovalor)
+                ac_Autovalor = autovls[-2] - ((autovls[-1] - autovls[-2])**2) / (autovalor - 2 * autovls[-1] + autovls[-2])
+                ac_Autovls.append(ac_Autovalor)
 
         
             autovls.append(autovalor)
@@ -101,7 +101,7 @@ p = 0.0000000001, inicio_acel = 10):
                     erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
                     erros.append(erro)
                 else:
-                    erro = np.abs(atk_Autovls[-1] - atk_Autovls[-2]) / np.abs(atk_Autovls[-1])
+                    erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
                     autovalor 
                 
@@ -118,44 +118,376 @@ p = 0.0000000001, inicio_acel = 10):
         
     return [i, erro, autovalor]
 
-    pass
+    
+
+
+
+
+"""
+
 
 
 def mp_mmq_linear(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+p = 0.0000000001, inicio_acel = 5):
+    
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+             
+            if i <= inicio_acel:
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
+              
+
+            else:
+                autovalor = lin(x = np.arange(1,i), y = autovls, pont = i)
+                autovls.append(autovalor)
+        
+            
+                
+            if i > 1: 
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+               
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
 
 
 
 def mp_mmq_logaritmo(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+p = 0.0000000001, inicio_acel = 5):
+    
+  #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+  #global ys, zs, autovls, erros, resultados, autovalor
+  y = yo
+  autovls = []
+  erros = []
+  ac_Autovls = []
+
+
+
+  i = 1
+
+  #iteração do método das potências
+
+  while i < maxit:  
+
+      #Cálculo de Z com base no valor anterior de y
+
+      z = np.dot(A, y)
+      
+      y = z/np.linalg.norm(z)
+      
+      #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+      if i > 0:
+          
+           
+            if i < inicio_acel:
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
+              
+
+            else:
+                autovalor = logaritmo(x = np.arange(1,i), y = autovls, pont = i)
+                autovls.append(autovalor)
+        
+          
+              
+            if i > 1: 
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+               
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+             
+          
+
+      #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+  
+      i+=1
+      
+  return [i, erro, autovalor]
 
 
 
 def mp_mmq_potencial(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+p = 0.0000000001, inicio_acel = 5):
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+             
+            if i < inicio_acel:
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
+              
+
+            else:
+                autovalor = potencial(x = np.arange(1,i), y = autovls, pont = i)
+                autovls.append(autovalor)
+        
+            
+                
+            if i > 1: 
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+               
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
 
 
 def mp_mmq_exponencial(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+p = 0.0000000001, inicio_acel = 5):
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
 
 
-def mp_mmq_potencial(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+             
+            if i < inicio_acel:
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
+              
+
+            else:
+                autovalor = exponencial(x = np.arange(1,i), y = autovls, pont = i)
+                autovls.append(autovalor)
+        
+            
+                
+            if i > 1: 
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+               
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
 
 
 def mp_mmq_geometrico(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+p = 0.0000000001, inicio_acel = 5):
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+            if i < inicio_acel:
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
+              
+
+            else:
+                autovalor = geometrico(x = np.arange(1,i), y = autovls, pont = i)
+                autovls.append(autovalor)
+            
+                
+            if i > 1: 
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+               
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
+
 
 
 def mp_mmq_polinomial(A, yo, maxit = 10000,
-p = 0.0000000001, inicio_acel = 10):
-    pass
+p = 0.0000000001, inicio_acel = 5):
+    
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+                
+            if i < inicio_acel:
+                autovalor = np.linalg.norm(z)
+                autovls.append(autovalor)
+              
+
+            else:
+                autovalor = polinomial(x = np.arange(1,i), y = autovls, pont = i)
+                autovls.append(autovalor)
+                
+
+            
+        
+            
+                
+            if i > 1: 
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erros.append(erro)
+               
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
 
 
 
@@ -178,7 +510,509 @@ p = 0.0000000001, inicio_acel = 10):
 
 
 
-"""def PotInv(A, y):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+
+def mp_mmq_linear(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 5):
+    
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+            autovalor = np.linalg.norm(z)
+            autovls.append(autovalor)
+                
+            if i >= inicio_acel:
+                ac_Autovalor = lin(x = np.arange(1,i+1), y = autovls, pont = i+1)
+                ac_Autovls.append(ac_Autovalor)
+
+        
+            
+                
+            if i > 1: 
+                if i <= inicio_acel:
+                    erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                    erros.append(erro)
+                else:
+                    erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                    erros.append(erro)
+                    autovalor 
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
+
+
+
+def mp_mmq_logaritmo(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 5):
+    
+  #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+  #global ys, zs, autovls, erros, resultados, autovalor
+  y = yo
+  autovls = []
+  erros = []
+  ac_Autovls = []
+
+
+
+  i = 1
+
+  #iteração do método das potências
+
+  while i < maxit:  
+
+      #Cálculo de Z com base no valor anterior de y
+
+      z = np.dot(A, y)
+      
+      y = z/np.linalg.norm(z)
+      
+      #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+      if i > 0:
+          
+          autovalor = np.linalg.norm(z)
+          autovls.append(autovalor)
+              
+          if i >= inicio_acel:
+              ac_Autovalor = logaritmo(x = np.arange(1,i+1), y = autovls, pont = i+1)
+              ac_Autovls.append(ac_Autovalor)
+
+      
+          
+              
+          if i > 1: 
+              if i <= inicio_acel:
+                  erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                  erros.append(erro)
+              else:
+                  erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                  erros.append(erro)
+                  autovalor 
+              
+              #critério de parada da precisão
+              if erro < p:
+                  break
+             
+          
+
+      #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+  
+      i+=1
+      
+  return [i, erro, autovalor]
+
+
+
+def mp_mmq_potencial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 5):
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+            autovalor = np.linalg.norm(z)
+            autovls.append(autovalor)
+                
+            if i >= inicio_acel:
+                ac_Autovalor = potencial(x = np.arange(1,i+1), y = autovls, pont = i+1)
+                ac_Autovls.append(ac_Autovalor)
+
+        
+            
+                
+            if i > 1: 
+                if i <= inicio_acel:
+                    erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                    erros.append(erro)
+                else:
+                    erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                    erros.append(erro)
+                    autovalor 
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
+
+
+def mp_mmq_exponencial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 5):
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+            autovalor = np.linalg.norm(z)
+            autovls.append(autovalor)
+                
+            if i >= inicio_acel:
+                ac_Autovalor = exponencial(x = np.arange(1,i+1), y = autovls, pont = i+1)
+                ac_Autovls.append(ac_Autovalor)
+
+        
+            
+                
+            if i > 1: 
+                if i <= inicio_acel:
+                    erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                    erros.append(erro)
+                else:
+                    erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                    erros.append(erro)
+                    autovalor 
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
+
+
+def mp_mmq_geometrico(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 5):
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+            autovalor = np.linalg.norm(z)
+            autovls.append(autovalor)
+                
+            if i >= inicio_acel:
+                ac_Autovalor = geometrico(x = np.arange(1,i+1), y = autovls, pont = i+1)
+                ac_Autovls.append(ac_Autovalor)
+
+        
+            
+                
+            if i > 1: 
+                if i <= inicio_acel:
+                    erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                    erros.append(erro)
+                else:
+                    erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                    erros.append(erro)
+                    autovalor 
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
+
+
+
+def mp_mmq_polinomial(A, yo, maxit = 10000,
+p = 0.0000000001, inicio_acel = 5):
+    
+    
+    #Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    #global ys, zs, autovls, erros, resultados, autovalor
+    y = yo
+    autovls = []
+    erros = []
+    ac_Autovls = []
+
+
+
+    i = 1
+
+    #iteração do método das potências
+
+    while i < maxit:  
+
+        #Cálculo de Z com base no valor anterior de y
+
+        z = np.dot(A, y)
+        
+        y = z/np.linalg.norm(z)
+        
+        #Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
+
+        if i > 0:
+            
+            autovalor = np.linalg.norm(z)
+            autovls.append(autovalor)
+                
+            if i >= inicio_acel:
+                ac_Autovalor = polinomial(x = np.arange(1,i+1), y = autovls, pont = i+1)
+                ac_Autovls.append(ac_Autovalor)
+
+        
+            
+                
+            if i > 1: 
+                if i <= inicio_acel:
+                    erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                    erros.append(erro)
+                else:
+                    erro = np.abs(ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                    erros.append(erro)
+                    autovalor 
+                
+                #critério de parada da precisão
+                if erro < p:
+                    break
+               
+            
+
+        #Cálculo de y com base no valor de z, tornando o vetor normalizado
+
+    
+        i+=1
+        
+    return [i, erro, autovalor]
+
+
+
+
+
+
+
+
+
+
+"""
+
+def PotInv(A, y):
     ys = []
     zs = []
     autovls = []
@@ -222,4 +1056,5 @@ p = 0.0000000001, inicio_acel = 10):
         
 
     return
-    """
+"""
+   

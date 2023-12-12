@@ -1,3 +1,5 @@
+testar melhor estratégia
+
 
 yo - estimativa inicial
 n = ponto inicial da aplicação da aceleração

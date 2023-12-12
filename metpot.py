@@ -507,12 +507,14 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
         if i > 0:
 
+            if i >= inicio_acel:
+                ac_Autovalor = lin(x=np.arange(1, i), y=autovls, pont=i)
+                ac_Autovls.append(ac_Autovalor)
+
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            if i >= inicio_acel:
-                ac_Autovalor = lin(x=np.arange(1, i+1), y=autovls, pont=i+1)
-                ac_Autovls.append(ac_Autovalor)
+
 
             if i > 1:
                 if i <= inicio_acel:
@@ -562,13 +564,15 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
         if i > 0:
 
+            if i >= inicio_acel:
+                ac_Autovalor = logaritmo(
+                    x=np.arange(1, i), y=autovls, pont=i)
+                ac_Autovls.append(ac_Autovalor)
+
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            if i >= inicio_acel:
-                ac_Autovalor = logaritmo(
-                    x=np.arange(1, i+1), y=autovls, pont=i+1)
-                ac_Autovls.append(ac_Autovalor)
+            
 
             if i > 1:
                 if i <= inicio_acel:
@@ -618,13 +622,14 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
         if i > 0:
 
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
             if i >= inicio_acel:
                 ac_Autovalor = potencial(
-                    x=np.arange(1, i+1), y=autovls, pont=i+1)
+                    x=np.arange(1, i), y=autovls, pont=i)
                 ac_Autovls.append(ac_Autovalor)
+
+            autovalor = np.linalg.norm(z)
+            autovls.append(autovalor)
+  
 
             if i > 1:
                 if i <= inicio_acel:
@@ -674,13 +679,15 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
         if i > 0:
 
+            if i >= inicio_acel:
+                ac_Autovalor = exponencial(
+                    x=np.arange(1, i), y=autovls, pont=i)
+                ac_Autovls.append(ac_Autovalor)
+
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            if i >= inicio_acel:
-                ac_Autovalor = exponencial(
-                    x=np.arange(1, i+1), y=autovls, pont=i+1)
-                ac_Autovls.append(ac_Autovalor)
+            
 
             if i > 1:
                 if i <= inicio_acel:
@@ -730,13 +737,15 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
         if i > 0:
 
+            if i >= inicio_acel:
+                ac_Autovalor = geometrico(
+                    x=np.arange(1, i), y=autovls, pont=i)
+                ac_Autovls.append(ac_Autovalor)
+            
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            if i >= inicio_acel:
-                ac_Autovalor = geometrico(
-                    x=np.arange(1, i+1), y=autovls, pont=i+1)
-                ac_Autovls.append(ac_Autovalor)
+            
 
             if i > 1:
                 if i <= inicio_acel:
@@ -786,13 +795,15 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
 
         if i > 0:
 
+            if i >= inicio_acel:
+                ac_Autovalor = polinomial(
+                    x=np.arange(1, i), y=autovls, pont=i)
+                ac_Autovls.append(ac_Autovalor)
+
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            if i >= inicio_acel:
-                ac_Autovalor = polinomial(
-                    x=np.arange(1, i+1), y=autovls, pont=i+1)
-                ac_Autovls.append(ac_Autovalor)
+            
 
             if i > 1:
                 if i <= inicio_acel:

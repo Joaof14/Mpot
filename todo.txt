@@ -1,5 +1,0 @@
-
-implementar aitken 
-ajustar e implementar mmq polinomial
-integrar com mmq
-reunião terça e quinta a respeito dos códigos

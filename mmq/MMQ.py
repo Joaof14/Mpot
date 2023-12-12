@@ -164,7 +164,7 @@ def polinomial(x, y, pont, grau=2):
     return atv
 
 
-
+"""
 
 
 x = np.array([1, 2, 3, 4, 5])
@@ -187,3 +187,4 @@ resultado = geometrico(x,y,pont)
 print('geometrico: ', resultado)
 
 
+"""

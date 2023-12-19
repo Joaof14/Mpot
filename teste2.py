@@ -536,7 +536,7 @@ dados = {
     'Erros': coluna_erro,
 }
 
-df1 = pd.DataFrame(dados)
+dfteste2 = pd.DataFrame(dados)
 
 
 

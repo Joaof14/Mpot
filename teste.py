@@ -486,7 +486,8 @@ Livro Neide Franco Cálculo Numérico
 #Livro página 210 exercício 7.5
 A = np.array([[1,-1,3],[-1,1,3],[3,-3,9]])
 
-
+#Livro página 210 exercício 7.6
+A = np.array([[2,-1,0],[-1,2,-1],[0,-1,-2]])
 
 #Livro página 210 exercício 7.8, resposta ja no enunciado
 A = np.array([[4,-1,1],[1,1,1],[-2,0,6]])
@@ -498,8 +499,6 @@ A = np.array([[4,-1,1],[1,1,1],[-2,0,6]])
 #Livro página 204 exemplo 7.4
 A = np.array([[3,0,1],[2,2,2],[4,2,5]])
 
-#Livro página 210 exercício 7.6
-A = np.array([[2,-1,0],[-1,2,-1],[0,-1,-2]])
 
 n = A.shape[1]
 yo = np.ones(n)

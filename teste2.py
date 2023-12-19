@@ -517,7 +517,7 @@ for acel, metodo in acels.items():
     coluna_acelera.append(acel)
 
     try:
-        i, e, autovalor = metodo(A, yo, p=0.01)
+        i, e, autovalor = metodo(A, yo, p=0.00001)
         coluna_ite.append(i)
         coluna_autovalor.append(autovalor)
         coluna_erro.append(e)

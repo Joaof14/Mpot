@@ -5,13 +5,28 @@ from mmq.MMQ import *
 
 def metodo_da_potencia(A, yo, maxit=10000,
                        p=0.00001):
+    """
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
-    #global ys, zs, autovls, erros, resultados, autovalor
+   Método das potências para calcular autovalores de um determinado matriz.
+
+   :param A: matriz do sistema.
+   
+   :param yo: vetor inicial de iteração.
+   
+   :param maxit: número máximo de iterações.
+   
+   :param p: critério de parada para a precisão.
+   
+   :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+   """
+   #global ys, zs, autovls, erros, resultados, autovalor
+    #Yo atribuido a y e inicialização de vetores para armazenar valores de erro e autovalores
+    
     y = yo
     autovls = []
     erros = []
-    ac_Autovls = []
+    
 
     i = 1
 
@@ -52,9 +67,29 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
 def Aitken(A, yo, maxit=10000,
            p=0.00001, inicio_acel=6):
+    
+    
+    """
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
+    
     y = yo
     autovls = []
     erros = []
@@ -86,10 +121,16 @@ def Aitken(A, yo, maxit=10000,
             autovls.append(autovalor)
 
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
+
+                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
+                
                 else:
                     erro = np.abs(
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
@@ -107,13 +148,29 @@ def Aitken(A, yo, maxit=10000,
     return [i, erro, autovalor]
 
 
-
-
 def mp_mmq_linear(A, yo, maxit=10000,
                   p=0.00001, inicio_acel=6):
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    
+    """
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     y = yo
     autovls = []
     erros = []
@@ -136,19 +193,26 @@ def mp_mmq_linear(A, yo, maxit=10000,
         if i > 0:
 
             if i >= inicio_acel:
+
+                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
+
                 ac_Autovalor = lin(x=np.arange(i-5, i), y=autovls[-5:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-
-
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
+
+                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
+                
                 else:
                     erro = np.abs(
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
@@ -169,8 +233,27 @@ def mp_mmq_linear(A, yo, maxit=10000,
 def mp_mmq_logaritmo(A, yo, maxit=10000,
                      p=0.00001, inicio_acel=6):
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    
+    """
+
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     y = yo
     autovls = []
     erros = []
@@ -193,6 +276,10 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
         if i > 0:
 
             if i >= inicio_acel:
+
+                #Chama mmq logaritmo com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
+
+
                 ac_Autovalor = logaritmo(
                     x=np.arange(i-5, i), y=autovls[-5:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
@@ -200,13 +287,17 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            
-
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
+
+                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
+                
                 else:
                     erro = np.abs(
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
@@ -227,8 +318,27 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 def mp_mmq_potencial(A, yo, maxit=10000,
                      p=0.00001, inicio_acel=6):
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    
+    """
+
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz de operador linear A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     y = yo
     autovls = []
     erros = []
@@ -251,19 +361,28 @@ def mp_mmq_potencial(A, yo, maxit=10000,
         if i > 0:
 
             if i >= inicio_acel:
+
+                #Chama mmq potencial com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
+
+
                 ac_Autovalor = potencial(
                     x=np.arange(i-5, i), y=autovls[-5:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
-  
 
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
+
+                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
+                
                 else:
                     erro = np.abs(
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
@@ -284,8 +403,27 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 def mp_mmq_exponencial(A, yo, maxit=10000,
                        p=0.00001, inicio_acel=6):
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    
+    """
+
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     y = yo
     autovls = []
     erros = []
@@ -308,6 +446,10 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
         if i > 0:
 
             if i >= inicio_acel:
+
+                #Chama mmq exponencial com os ultimos 5 autovalores e iteraçõespara descobrir autovalor resultante
+
+
                 ac_Autovalor = exponencial(
                     x=np.arange(i-5, i), y=autovls[-5:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
@@ -315,13 +457,17 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            
-
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
+
+                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
+                
                 else:
                     erro = np.abs(
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
@@ -342,8 +488,27 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 def mp_mmq_geometrico(A, yo, maxit=10000,
                       p=0.00001, inicio_acel=6):
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    
+    """
+
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     y = yo
     autovls = []
     erros = []
@@ -369,14 +534,19 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
                 ac_Autovalor = geometrico(
                     x=np.arange(i-5, i), y=autovls[-5:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
-            
+
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            
-
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
+
+                #Chama mmq geometrico com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
+
+
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
@@ -400,8 +570,27 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 def mp_mmq_polinomial(A, yo, maxit=10000,
                       p=0.00001, inicio_acel=6):
 
-    # Inicialização de vetores para armazenar valores de z e y, adicionando o yo
+    
+    """
+
+    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+
+    :param A: matriz de operador linear A.
+    
+    :param yo: vetor de autovetores iniciais.
+    
+    :param maxit: número máximo de iterações.
+    
+    :param p: critério de parada para a precisão.
+    
+    :param inicio_acel: índice para começar a aplicar aceleração.
+    
+    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
+    """
+    
     #global ys, zs, autovls, erros, resultados, autovalor
+    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     y = yo
     autovls = []
     erros = []
@@ -424,6 +613,10 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
         if i > 0:
 
             if i >= inicio_acel:
+
+                #Chama mmq polinomial com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
+
+
                 ac_Autovalor = polinomial(
                     x=np.arange(i-5, i), y=autovls[-5:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
@@ -431,13 +624,17 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
             autovalor = np.linalg.norm(z)
             autovls.append(autovalor)
 
-            
-
             if i > 1:
+                
+                #Calcular erro de forma normal no metodo da potencia antes da aceleração
+
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
                                   ) / np.abs(autovls[-1])
                     erros.append(erro)
+
+                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
+                
                 else:
                     erro = np.abs(
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
@@ -454,51 +651,3 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
 
     return [i, erro, autovalor]
 
-
-"""
-
-def PotInv(A, y):
-    ys = []
-    zs = []
-    autovls = []
-
-    L, U = LU(A)
-    
-
-    i = 0
-    while i < maxit:
-        ys.append(y)  
-        x = retrosub(L,y,False)
-        z = retrosub(U,x,True)
-        zs.append(z)
-        i += 1
-
-
-        if i > 0:
-            autovl = zs[-1]/ys[-1]
-            autovls.append(autovl)
-            
-
-        if i > 1: 
-            err = (autovls[-1] - autovls[-2])/autovls[-1]
-            
-            err = np.abs(err)
-            mn = np.argmin(err)
-            resultado = autovl[mn]
-            e = np.min(err)
-            if e < p:  
-                print(resultado) 
-                print(1/resultado)
-                print(y)
-                break
-
-
-
-
-        y = z/np.max(np.abs(z))
-
-    print(i)
-        
-
-    return
-"""

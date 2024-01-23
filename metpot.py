@@ -66,7 +66,7 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
 
 def Aitken(A, yo, maxit=10000,
-           p=0.00001, inicio_acel=6):
+           p=0.00001, inicio_acel=10):
     
     
     """
@@ -149,7 +149,7 @@ def Aitken(A, yo, maxit=10000,
 
 
 def mp_mmq_linear(A, yo, maxit=10000,
-                  p=0.00001, inicio_acel=6):
+                  p=0.00001, inicio_acel=10):
 
     
     """
@@ -231,7 +231,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
 
 def mp_mmq_logaritmo(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=6):
+                     p=0.00001, inicio_acel=10):
 
     
     """
@@ -316,7 +316,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
 
 def mp_mmq_potencial(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=6):
+                     p=0.00001, inicio_acel=10):
 
     
     """
@@ -401,7 +401,7 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
 
 def mp_mmq_exponencial(A, yo, maxit=10000,
-                       p=0.00001, inicio_acel=6):
+                       p=0.00001, inicio_acel=10):
 
     
     """
@@ -486,7 +486,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
 
 def mp_mmq_geometrico(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=6):
+                      p=0.00001, inicio_acel=10):
 
     
     """
@@ -568,7 +568,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
 
 def mp_mmq_polinomial(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=6):
+                      p=0.00001, inicio_acel=10):
 
     
     """

@@ -50,7 +50,7 @@ for arquivo in arquivos_na_pasta:
         coluna_simetria.append(simetria)
         coluna_acelera.append(acel)
         try:
-            i, e, autovalor = metodo(A, yo, p=0.0000000001)
+            i, e, autovalor = metodo(A, yo, p=0.00001)
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)

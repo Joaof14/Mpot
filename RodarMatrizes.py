@@ -7,6 +7,7 @@ from io import StringIO
 import os
 import glob
 import pandas as pd
+import time
 
 
 caminho = 'matrizes/'
@@ -20,6 +21,7 @@ coluna_simetria = []
 coluna_ite = []
 coluna_autovalor = []
 coluna_erro = []
+coluna_tempo = []
 
 #acels = ['Nenhuma', 'MMQ_Linear', 'MMQ_Logaritmo', 'MMQ_Exponencial', 'MMQ_Potencial', 'MMQ_Geometrico', 'MMQ_Polinomial']
 
@@ -49,13 +51,18 @@ for arquivo in arquivos_na_pasta:
         coluna_campo.append(campo)
         coluna_simetria.append(simetria)
         coluna_acelera.append(acel)
+        
         try:
+            inicio = time.time()
             i, e, autovalor = metodo(A, yo, p=0.00001)
+            fim = time.time()
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)
+            coluna_tempo.append(fim - inicio)
 
         except:
+            coluna_tempo('erro')
             coluna_ite.append('erro')
             coluna_autovalor.append('erro')
             coluna_erro.append('erro')
@@ -66,6 +73,7 @@ dados = {
     'Aceleração': coluna_acelera,
     'Autovalor': coluna_autovalor,
     'Iterações': coluna_ite,
+    'Tempo': coluna_tempo, 
     'Erros': coluna_erro,
     'Ordem': coluna_ordem,
     'Campo': coluna_campo,

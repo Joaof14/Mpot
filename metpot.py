@@ -217,7 +217,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
                     erro = np.abs(
                         ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -302,7 +302,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
                     erro = np.abs(
                         ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -387,7 +387,7 @@ def mp_mmq_potencial(A, yo, maxit=10000,
                     erro = np.abs(
                         ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -472,7 +472,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
                     erro = np.abs(
                         ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -554,7 +554,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
                     erro = np.abs(
                         ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -639,7 +639,7 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
                     erro = np.abs(
                         ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:

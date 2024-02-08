@@ -10,7 +10,7 @@ import pandas as pd
 import time
 
 
-caminho = 'matrizes/'
+caminho = 'matrizes/slot05'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 coluna_nomes = []
@@ -51,7 +51,7 @@ for arquivo in arquivos_na_pasta:
         coluna_campo.append(campo)
         coluna_simetria.append(simetria)
         coluna_acelera.append(acel)
-        
+
         try:
             inicio = time.time()
             i, e, autovalor = metodo(A, yo, p=0.00001)
@@ -82,4 +82,6 @@ dados = {
 
 df1 = pd.DataFrame(dados)
 
-df1.to_excel('resultados.xlsx')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot05')
+
+df1.to_excel('resultados_slot05.xlsx')

@@ -1,17 +1,16 @@
 import numpy as np
 from metpot import metodo_da_potencia, Aitken, mp_mmq_linear, mp_mmq_logaritmo, mp_mmq_exponencial, mp_mmq_potencial, mp_mmq_geometrico, mp_mmq_polinomial
 
-
 import scipy
 from io import StringIO
 import os
 import glob
 import pandas as pd
 import time
+import matplotlib.pyplot as plt
 
 
-caminho = 'matrizes/slot05'
-arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
+
 
 coluna_nomes = []
 coluna_acelera = []
@@ -36,6 +35,10 @@ acels = {'Nenhuma': metodo_da_potencia,
          }
 
 
+
+caminho = 'matrizes/slot03'
+arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
+
 for arquivo in arquivos_na_pasta:
     ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
     matriz = scipy.io.mmread(arquivo)
@@ -54,12 +57,19 @@ for arquivo in arquivos_na_pasta:
 
         try:
             inicio = time.time()
-            i, e, autovalor = metodo(A, yo, p=0.00001)
+            i, e, autovalor, autovls = metodo(A, yo, p=0.00001)
             fim = time.time()
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)
             coluna_tempo.append(fim - inicio)
+
+            if acel == 'Nenhuma':
+                graf, eix = plt.subplots()
+                eix.scatter(np.arange(1,i), autovls[1:])
+                eix.set_xlabel('Iterações')
+                eix.set_ylabel('Autovalores')
+                graf.savefig(arquivo+'.png')
 
         except:
             coluna_tempo('erro')
@@ -82,6 +92,6 @@ dados = {
 
 df1 = pd.DataFrame(dados)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot05')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot03')
 
-df1.to_excel('resultados_slot05.xlsx')
+df1.to_excel('resultados/resultados_slot03.xlsx')

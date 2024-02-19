@@ -54,13 +54,15 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
                 # critério de parada da precisão
                 if erro < p:
+
+                    
                     break
 
         # Cálculo de y com base no valor de z, tornando o vetor normalizado
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 #Pot(A, yo)
 
@@ -145,7 +147,7 @@ def Aitken(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_linear(A, yo, maxit=10000,
@@ -227,7 +229,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_logaritmo(A, yo, maxit=10000,
@@ -312,7 +314,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_potencial(A, yo, maxit=10000,
@@ -397,7 +399,7 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_exponencial(A, yo, maxit=10000,
@@ -482,7 +484,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_geometrico(A, yo, maxit=10000,
@@ -564,7 +566,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_polinomial(A, yo, maxit=10000,
@@ -649,5 +651,5 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 

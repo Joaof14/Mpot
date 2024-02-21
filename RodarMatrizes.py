@@ -63,13 +63,14 @@ for arquivo in arquivos_na_pasta:
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)
             coluna_tempo.append(fim - inicio)
-
+            """
             if acel == 'Nenhuma':
                 graf, eix = plt.subplots()
                 eix.scatter(np.arange(1,i), autovls[1:])
                 eix.set_xlabel('Iterações')
                 eix.set_ylabel('Autovalores')
-                graf.savefig(arquivo+'.png')
+                graf.savefig(arquivo+'.png')"""
+            
 
         except:
             coluna_tempo.append('erro')

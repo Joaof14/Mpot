@@ -73,7 +73,7 @@ def Aitken(A, yo, maxit=10000,
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma Matriz A usando o método de Aitken.
 
     :param A: matriz A.
     
@@ -155,7 +155,8 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
     
     """
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+   
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -238,7 +239,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -251,6 +252,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
     :param inicio_acel: índice para começar a aplicar aceleração.
     
     :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
 
     """
     
@@ -323,9 +325,9 @@ def mp_mmq_potencial(A, yo, maxit=10000,
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
-    :param A: matriz de operador linear A.
+    :param A: matriz A.
     
     :param yo: vetor de autovetores iniciais.
     
@@ -408,7 +410,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -493,7 +495,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -506,6 +508,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
     :param inicio_acel: índice para começar a aplicar aceleração.
     
     :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
 
     """
     
@@ -575,9 +578,9 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
-    :param A: matriz de operador linear A.
+    :param A: matriz A.
     
     :param yo: vetor de autovetores iniciais.
     

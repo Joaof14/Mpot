@@ -36,7 +36,7 @@ acels = {'Nenhuma': metodo_da_potencia,
 
 
 
-caminho = 'matrizes/slot11'
+caminho = 'matrizes/'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 for arquivo in arquivos_na_pasta:
@@ -93,6 +93,6 @@ dados = {
 
 df1 = pd.DataFrame(dados)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot11')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/')
 
-df1.to_excel('resultados/resultados_slot11.xlsx')
+df1.to_excel('resultados/resultados_.xlsx')

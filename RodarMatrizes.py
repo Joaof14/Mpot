@@ -56,8 +56,7 @@ for number in estr:
             coluna_campo.append(campo)
             coluna_simetria.append(simetria)
             coluna_acelera.append(acel)
-            coluna_inicioAc.append(number+1)
-            coluna_ultimos.append(number)
+            
             
     
             try:
@@ -65,10 +64,15 @@ for number in estr:
                     inicio = time.time()
                     i, e, autovalor, autovls = metodo(A, yo, p=0.00001)
                     fim = time.time()
+                    coluna_inicioAc.append(0)
+                    coluna_ultimos.append(0)
+
                 else:
                     inicio = time.time()
-                    i, e, autovalor, autovls = metodo(A, yo, p=0.00001, inicio_acel=number+1, ultimos=number)
+                    i, e, autovalor, autovls = metodo(A, yo, p=0.00001, ultimos=number)
                     fim = time.time()
+                    coluna_inicioAc.append(6)
+                    coluna_ultimos.append(number)
                 coluna_ite.append(i)
                 coluna_autovalor.append(autovalor)
                 coluna_erro.append(e)

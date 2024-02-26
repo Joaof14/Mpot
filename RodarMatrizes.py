@@ -107,4 +107,4 @@ df1 = pd.DataFrame(dados)
 
 df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/')
 
-df1.to_excel('resultados/resultados_ac_5-6.xlsx')
+df1.to_excel('resultados/resultados_comparativos.xlsx')

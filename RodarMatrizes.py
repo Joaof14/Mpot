@@ -19,7 +19,6 @@ coluna_campo = []
 coluna_simetria = []
 coluna_ite = []
 coluna_autovalor = []
-coluna_erro = []
 coluna_tempo = []
 coluna_ultimos = []
 coluna_inicioAc = []
@@ -49,6 +48,8 @@ for arquivo in arquivos_na_pasta:
     n = A.shape[1]
     yo = np.ones(n)
 
+
+
     for acel, metodo in acels.items():
 
         coluna_nomes.append(arquivo)
@@ -60,13 +61,13 @@ for arquivo in arquivos_na_pasta:
         
 
         try:
-        
+            
             inicio = time.time()
-            i, e, autovalor, autovls = metodo(A, yo, p=0.00001)
+            i, e, autovalor, autovls = metodo(A, yo, p=0.0000000001)
             fim = time.time()
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
-            coluna_erro.append(e)
+            
             coluna_tempo.append(fim - inicio)
             """
             if acel == 'Nenhuma':
@@ -81,7 +82,7 @@ for arquivo in arquivos_na_pasta:
             coluna_tempo.append('erro')
             coluna_ite.append('erro')
             coluna_autovalor.append('erro')
-            coluna_erro.append('erro')
+
 
 
 dados = {
@@ -90,14 +91,15 @@ dados = {
     'Autovalor': coluna_autovalor,
     'Iterações': coluna_ite,
     'Tempo': coluna_tempo, 
-    'Erros': coluna_erro,
     'Ordem': coluna_ordem,
     'Campo': coluna_campo,
     'Simetria': coluna_simetria
 }
 
+
+
 df1 = pd.DataFrame(dados)
 
 df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/')
 
-df1.to_excel('resultados/resultados_comparativos.xlsx')
+df1.to_excel('resultados/analise/resultados.xlsx')

@@ -58,7 +58,7 @@ def metodo_da_potencia(A, yo, max_it=10000,
 
         i += 1
 
-    return [i, erro, autovalor, autovls, z]
+    return [i, erro, autovls, z]
 
 #Pot(A, yo)
 
@@ -156,6 +156,6 @@ yo = np.ones(n)
 
 
 
-i, erro, autovalor, autovalores, autovetor = metodo_da_potencia(A, yo, p  = prec)
+i, erro, autovalores, autovetor = metodo_da_potencia(A, yo, p  = prec)
 
 i_aitken, erro_aitken, autovalores_aitken, autovetor_aitken = Aitken(A, yo, p  = prec)

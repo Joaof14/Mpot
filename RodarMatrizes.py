@@ -45,8 +45,7 @@ for arquivo in arquivos_na_pasta:
     matriz = scipy.io.mmread(arquivo)
     matriz.A
     A = np.array(matriz.A)
-    n = A.shape[1]
-    yo = np.ones(n)
+    
 
 
 
@@ -63,7 +62,7 @@ for arquivo in arquivos_na_pasta:
         try:
             
             inicio = time.time()
-            i, e, autovalor, autovls = metodo(A, yo, p=0.0000000001)
+            i, e, autovalor, autovls = metodo(A, p=0.0000000001)
             fim = time.time()
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)

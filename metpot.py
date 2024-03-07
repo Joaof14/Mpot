@@ -3,7 +3,7 @@ from mmq.MMQ import *
 #from lerMatriz import *
 
 
-def metodo_da_potencia(A, yo, maxit=10000,
+def metodo_da_potencia(A, yo, max_it=10000,
                        p=0.00001):
     """
 
@@ -13,26 +13,24 @@ def metodo_da_potencia(A, yo, maxit=10000,
    
    :param yo: vetor inicial de iteração.
    
-   :param maxit: número máximo de iterações.
+   :param max_it: número máximo de iterações.
    
    :param p: critério de parada para a precisão.
    
    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
 
    """
-   #global ys, zs, autovls, erros, resultados, autovalor
-    #Yo atribuido a y e inicialização de vetores para armazenar valores de erro e autovalores
     
-    y = yo
     autovls = []
     erros = []
+    y = yo
     
 
     i = 1
 
     # iteração do método das potências
 
-    while i < maxit:
+    while i < max_it:
 
         # Cálculo de Z com base no valor anterior de y
 
@@ -49,26 +47,24 @@ def metodo_da_potencia(A, yo, maxit=10000,
             autovls.append(autovalor)
 
             if i > 1:
-                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-1])
+                erro = np.abs(autovls[-1] - autovls[-2]) / np.abs(autovls[-2])
                 erros.append(erro)
 
                 # critério de parada da precisão
                 if erro < p:
-
-                    
                     break
 
         # Cálculo de y com base no valor de z, tornando o vetor normalizado
 
         i += 1
 
-    return [i, erro, autovalor, autovls]
+    return [i, erro, autovalor, autovls, z]
 
 #Pot(A, yo)
 
 
-def Aitken(A, yo, maxit=10000,
-           p=0.00001, inicio_acel=4):
+def Aitken(A, yo, max_it=10000,
+           p=0.00001, inicio_acel = 4):
     
     
     """
@@ -79,7 +75,7 @@ def Aitken(A, yo, maxit=10000,
     
     :param yo: vetor de autovetores iniciais.
     
-    :param maxit: número máximo de iterações.
+    :param max_it: número máximo de iterações.
     
     :param p: critério de parada para a precisão.
     
@@ -88,7 +84,6 @@ def Aitken(A, yo, maxit=10000,
     :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
 
     """
-    
     #global ys, zs, autovls, erros, resultados, autovalor
     #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
     
@@ -101,7 +96,7 @@ def Aitken(A, yo, maxit=10000,
 
     # iteração do método das potências
 
-    while i < maxit:
+    while i < max_it:
 
         # Cálculo de Z com base no valor anterior de y
 
@@ -128,14 +123,14 @@ def Aitken(A, yo, maxit=10000,
 
                 if i <= inicio_acel:
                     erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
+                                  ) / np.abs(autovls[-2])
                     erros.append(erro)
 
                 #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
                     autovalor
 
@@ -147,519 +142,20 @@ def Aitken(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor, autovls]
+    return [i, erro, ac_Autovls, z]
+# Example usage:
+A = np.array([[-4, 14, 0],
+              [-5, 13, 0],
+              [-1, 0, 2]])
 
-def mp_mmq_linear(A, yo, maxit=10000,
-                  p=0.00001, inicio_acel=6, ultimos = 5):
+prec = 1e-6
+max_iter = 10000
 
-    
-    """
-    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
+n = A.shape[0]
+yo = np.ones(n)
 
-    :param A: matriz A.
-    
-    :param yo: vetor de autovetores iniciais.
-    
-    :param maxit: número máximo de iterações.
-    
-    :param p: critério de parada para a precisão.
-    
-    :param inicio_acel: índice para começar a aplicar aceleração.
-    
-    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
 
-    """
-    
-    #global ys, zs, autovls, erros, resultados, autovalor
-    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
-    y = yo
-    autovls = []
-    erros = []
-    ac_Autovls = []
 
-    i = 1
+i, erro, autovalor, autovalores, autovetor = metodo_da_potencia(A, yo, p  = prec)
 
-    # iteração do método das potências
-
-    while i < maxit:
-
-        # Cálculo de Z com base no valor anterior de y
-
-        z = np.dot(A, y)
-
-        y = z/np.linalg.norm(z)
-
-        # Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
-
-        if i > 0:
-
-            if i >= inicio_acel:
-
-                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
-                if i > ultimos:
-                    ac_Autovalor = lin(x=np.arange(i-ultimos, i), y=autovls[-ultimos:], pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-                else:
-                    ac_Autovalor = lin(x=np.arange(1, i), y=autovls, pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
-            if i > 1:
-                
-                #Calcular erro de forma normal no metodo da potencia antes da aceleração
-
-                if i <= inicio_acel:
-                    erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
-                    erros.append(erro)
-
-                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
-                
-                else:
-                    erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
-                    erros.append(erro)
-                    autovalor
-
-                # critério de parada da precisão
-                if erro < p:
-                    break
-
-        # Cálculo de y com base no valor de z, tornando o vetor normalizado
-
-        i += 1
-
-    return [i, erro, autovalor, autovls]
-
-
-def mp_mmq_logaritmo(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=6, ultimos = 5):
-
-    
-    
-    """
-    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
-
-    :param A: matriz A.
-    
-    :param yo: vetor de autovetores iniciais.
-    
-    :param maxit: número máximo de iterações.
-    
-    :param p: critério de parada para a precisão.
-    
-    :param inicio_acel: índice para começar a aplicar aceleração.
-    
-    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
-
-    """
-    
-    #global ys, zs, autovls, erros, resultados, autovalor
-    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
-    y = yo
-    autovls = []
-    erros = []
-    ac_Autovls = []
-
-    i = 1
-
-    # iteração do método das potências
-
-    while i < maxit:
-
-        # Cálculo de Z com base no valor anterior de y
-
-        z = np.dot(A, y)
-
-        y = z/np.linalg.norm(z)
-
-        # Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
-
-        if i > 0:
-
-            if i >= inicio_acel:
-
-                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
-                if i > ultimos:
-                    ac_Autovalor = logaritmo(x=np.arange(i-ultimos, i), y=autovls[-ultimos:], pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-                else:
-                    ac_Autovalor = logaritmo(x=np.arange(1, i), y=autovls, pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
-            if i > 1:
-                
-                #Calcular erro de forma normal no metodo da potencia antes da aceleração
-
-                if i <= inicio_acel:
-                    erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
-                    erros.append(erro)
-
-                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
-                
-                else:
-                    erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
-                    erros.append(erro)
-                    autovalor
-
-                # critério de parada da precisão
-                if erro < p:
-                    break
-
-        # Cálculo de y com base no valor de z, tornando o vetor normalizado
-
-        i += 1
-
-    return [i, erro, autovalor, autovls]
-
-
-
-def mp_mmq_potencial(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=6, ultimos = 5):
-
-    
-    """
-    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
-
-    :param A: matriz A.
-    
-    :param yo: vetor de autovetores iniciais.
-    
-    :param maxit: número máximo de iterações.
-    
-    :param p: critério de parada para a precisão.
-    
-    :param inicio_acel: índice para começar a aplicar aceleração.
-    
-    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
-
-    """
-    
-    #global ys, zs, autovls, erros, resultados, autovalor
-    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
-    y = yo
-    autovls = []
-    erros = []
-    ac_Autovls = []
-
-    i = 1
-
-    # iteração do método das potências
-
-    while i < maxit:
-
-        # Cálculo de Z com base no valor anterior de y
-
-        z = np.dot(A, y)
-
-        y = z/np.linalg.norm(z)
-
-        # Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
-
-        if i > 0:
-
-            if i >= inicio_acel:
-
-                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
-                if i > ultimos:
-                    ac_Autovalor = potencial(x=np.arange(i-ultimos, i), y=autovls[-ultimos:], pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-                else:
-                    ac_Autovalor = potencial(x=np.arange(1, i), y=autovls, pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
-            if i > 1:
-                
-                #Calcular erro de forma normal no metodo da potencia antes da aceleração
-
-                if i <= inicio_acel:
-                    erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
-                    erros.append(erro)
-
-                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
-                
-                else:
-                    erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
-                    erros.append(erro)
-                    autovalor
-
-                # critério de parada da precisão
-                if erro < p:
-                    break
-
-        # Cálculo de y com base no valor de z, tornando o vetor normalizado
-
-        i += 1
-
-    return [i, erro, autovalor, autovls]
-
-
-def mp_mmq_exponencial(A, yo, maxit=10000,
-                       p=0.00001, inicio_acel=6, ultimos = 5):
-
-
-    
-    """
-    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
-
-    :param A: matriz A.
-    
-    :param yo: vetor de autovetores iniciais.
-    
-    :param maxit: número máximo de iterações.
-    
-    :param p: critério de parada para a precisão.
-    
-    :param inicio_acel: índice para começar a aplicar aceleração.
-    
-    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
-
-    """
-    
-    #global ys, zs, autovls, erros, resultados, autovalor
-    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
-    y = yo
-    autovls = []
-    erros = []
-    ac_Autovls = []
-
-    i = 1
-
-    # iteração do método das potências
-
-    while i < maxit:
-
-        # Cálculo de Z com base no valor anterior de y
-
-        z = np.dot(A, y)
-
-        y = z/np.linalg.norm(z)
-
-        # Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
-
-        if i > 0:
-
-            if i >= inicio_acel:
-
-                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
-                if i > ultimos:
-                    ac_Autovalor = exponencial(x=np.arange(i-ultimos, i), y=autovls[-ultimos:], pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-                else:
-                    ac_Autovalor = exponencial(x=np.arange(1, i), y=autovls, pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
-            if i > 1:
-                
-                #Calcular erro de forma normal no metodo da potencia antes da aceleração
-
-                if i <= inicio_acel:
-                    erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
-                    erros.append(erro)
-
-                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
-                
-                else:
-                    erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
-                    erros.append(erro)
-                    autovalor
-
-                # critério de parada da precisão
-                if erro < p:
-                    break
-
-        # Cálculo de y com base no valor de z, tornando o vetor normalizado
-
-        i += 1
-
-    return [i, erro, autovalor, autovls]
-
-
-
-def mp_mmq_geometrico(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=6, ultimos = 5):
-
-    
-    """
-    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
-
-    :param A: matriz A.
-    
-    :param yo: vetor de autovetores iniciais.
-    
-    :param maxit: número máximo de iterações.
-    
-    :param p: critério de parada para a precisão.
-    
-    :param inicio_acel: índice para começar a aplicar aceleração.
-    
-    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
-
-    """
-    
-    #global ys, zs, autovls, erros, resultados, autovalor
-    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
-    y = yo
-    autovls = []
-    erros = []
-    ac_Autovls = []
-
-    i = 1
-
-    # iteração do método das potências
-
-    while i < maxit:
-
-        # Cálculo de Z com base no valor anterior de y
-
-        z = np.dot(A, y)
-
-        y = z/np.linalg.norm(z)
-
-        # Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
-
-        if i > 0:
-
-            if i >= inicio_acel:
-
-                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
-                if i > ultimos:
-                    ac_Autovalor = geometrico(x=np.arange(i-ultimos, i), y=autovls[-ultimos:], pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-                else:
-                    ac_Autovalor = geometrico(x=np.arange(1, i), y=autovls, pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
-            if i > 1:
-                
-                #Calcular erro de forma normal no metodo da potencia antes da aceleração
-
-                if i <= inicio_acel:
-                    erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
-                    erros.append(erro)
-
-                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
-                
-                else:
-                    erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
-                    erros.append(erro)
-                    autovalor
-
-                # critério de parada da precisão
-                if erro < p:
-                    break
-
-        # Cálculo de y com base no valor de z, tornando o vetor normalizado
-
-        i += 1
-
-    return [i, erro, autovalor, autovls]
-
-
-
-def mp_mmq_polinomial(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=6, ultimos = 5):
-
-    
-    
-    """
-    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
-
-    :param A: matriz A.
-    
-    :param yo: vetor de autovetores iniciais.
-    
-    :param maxit: número máximo de iterações.
-    
-    :param p: critério de parada para a precisão.
-    
-    :param inicio_acel: índice para começar a aplicar aceleração.
-    
-    :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
-
-    """
-    
-    #global ys, zs, autovls, erros, resultados, autovalor
-    #Inicialização de vetores para armazenar autavalores normais e de aceleração, adicionando o yo a y
-    y = yo
-    autovls = []
-    erros = []
-    ac_Autovls = []
-
-    i = 1
-
-    # iteração do método das potências
-
-    while i < maxit:
-
-        # Cálculo de Z com base no valor anterior de y
-
-        z = np.dot(A, y)
-
-        y = z/np.linalg.norm(z)
-
-        # Cálcular vetor com possíveis autovalores caso iterações sejam suficientes para tal
-
-        if i > 0:
-
-            if i >= inicio_acel:
-
-                #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
-                if i > ultimos:
-                    ac_Autovalor = polinomial(x=np.arange(i-ultimos, i), y=autovls[-ultimos:], pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-                else:
-                    ac_Autovalor = polinomial(x=np.arange(1, i), y=autovls, pont=i)
-                    ac_Autovls.append(ac_Autovalor)
-
-            autovalor = np.linalg.norm(z)
-            autovls.append(autovalor)
-
-            if i > 1:
-                
-                #Calcular erro de forma normal no metodo da potencia antes da aceleração
-
-                if i <= inicio_acel:
-                    erro = np.abs(autovls[-1] - autovls[-2]
-                                  ) / np.abs(autovls[-1])
-                    erros.append(erro)
-
-                #Calcular erro com base nos autovalores da aceleração caso ela ja tenha iniciado e rodado no mínimo duas vezes
-                
-                else:
-                    erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
-                    erros.append(erro)
-                    autovalor
-
-                # critério de parada da precisão
-                if erro < p:
-                    break
-
-        # Cálculo de y com base no valor de z, tornando o vetor normalizado
-
-        i += 1
-
-    return [i, erro, autovalor, autovls]
+i_aitken, erro_aitken, autovalores_aitken, autovetor_aitken = Aitken(A, yo, p  = prec)

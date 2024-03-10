@@ -39,6 +39,7 @@ metodoMinQua = {
     'Polinomial': polinomial
 }
 coluna_nomes2 = []
+coluna_metodo2 = []
 coluna_parametro_seg_grau = []
 coluna_parametro_p_grau = []
 coluna_parametro_ind = []
@@ -56,20 +57,22 @@ for arquivo in arquivos_na_pasta:
     matriz = scipy.io.mmread(arquivo)
     matriz.A
     A = np.array(matriz.A)
+    n = A.shape[0]
+    yo = np.ones(n)
     
 
 
 
-    for nome, metodo in metodosDaPotencia.items():
+    for nomeMetodo, metodo in metodosDaPotencia.items():
 
         coluna_nomes.append(arquivo)
         coluna_ordem.append(ordem)
         coluna_campo.append(campo)
         coluna_simetria.append(simetria)
-        coluna_acelera.append(nome)
+        coluna_acelera.append(nomeMetodo)
 
         inicio = time.time()
-        i, e, autovalor, autovls = metodo(A, p=0.0000000001)
+        i, e, autovalor, autovls = metodo(A,yo, p=0.0001)
         fim = time.time()
         coluna_ite.append(i)
         coluna_autovalor.append(autovalor)
@@ -77,9 +80,20 @@ for arquivo in arquivos_na_pasta:
         coluna_tempo.append(fim - inicio)
         
         for ajuste, mmq in metodoMinQua:
-            coluna_nomes2.append(arquivo)
+            try:
+                coluna_ajuste.append(ajuste)
+                coluna_nomes2.append(arquivo)
+                coluna_metodo2.append(nomeMetodo)
+                p2, p1, p0, r2 = ajuste(np.arange(1, i+1), autovls)
+                
 
-            pass
+            except:
+                coluna_parametro_seg_grau.append('erro')
+                coluna_parametro_p_grau.append('erro')
+                coluna_parametro_ind.append('p0')
+                coluna_r2.append('r2')
+                
+
 
 
 
@@ -96,9 +110,9 @@ dados1 = {
 
 dados2 = {
     'Matriz': coluna_nomes2,
+    'Metodo': coluna_metodo2,
     'r2': coluna_r2,
     'ajuste': coluna_ajuste,
-    'erro': coluna_erro,
     'segundo grau': coluna_parametro_seg_grau,
     'primeiro grau': coluna_parametro_p_grau,
     'independente': coluna_parametro_ind

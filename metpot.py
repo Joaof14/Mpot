@@ -144,6 +144,7 @@ def Aitken(A, yo, max_it=10000,
 
     return [i, erro, autovls[:4] + ac_Autovls, z]
 # Example usage:
+"""
 A = np.array([[-4, 14, 0],
               [-5, 13, 0],
               [-1, 0, 2]])
@@ -160,3 +161,5 @@ i, erro, autovalores, autovetor = metodo_da_potencia(A, yo, p  = prec)
 
 i_aitken, erro_aitken, autovalores_aitken, autovetor_aitken = Aitken(A, yo, p  = prec)
 
+
+ """

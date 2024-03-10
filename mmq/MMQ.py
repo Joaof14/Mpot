@@ -53,23 +53,23 @@ def plotgrafico( x,  y , linha):
 # formar tabela
 
 
-def lin(x, y, pont):
+def lin(x, y):
 
     # Calculos de coeficientes
     a, b = calcula_reg(x, y)
     # Calculo r2
     r2 = calcula_r2(x, y, a, b)
     # criar return
-    atv = a*pont + b
+    #atv = a*pont + b
     # Gráficos
     linha = a*x, y + b
     # criar file text
-    return a, b, r2
+    return 0, a, b, r2
 
     # formar tabela log
 
 
-def logaritmo(x, y, pont):
+def logaritmo(x, y):
 
     x = np.log(x)
 
@@ -78,14 +78,13 @@ def logaritmo(x, y, pont):
     # Calculo r2
     r2 = calcula_r2(x, y, a, b)
     # criar return
-    atv = a*np.log(pont) + b
     # Gráficos
-    linha = a*np.log(x) + b
+    #linha = a*np.log(x) + b
     # criar file text
-    return a, b, r2
+    return 0, a, b, r2
 
 
-def potencial(x, y, pont):
+def potencial(x, y):
 
     x = np.log(x)
     y = np.log(y)
@@ -95,16 +94,16 @@ def potencial(x, y, pont):
     # Calculo r2
     r2 = calcula_r2(x, y, a, b)
     # criar return
-    atv = b*pont**a
+    #atv = b*pont**a
     # Conversão dos coeficientes
     b = np.exp(b)
     # Gráficos
     linha = a*x + b
     # criar file text
-    return a, b, r2
+    return 0, a, b, r2
 
 
-def exponencial(x, y, pont):
+def exponencial(x, y):
 
     y = np.log(y)
 
@@ -115,16 +114,16 @@ def exponencial(x, y, pont):
     # Calculo r2
     r2 = calcula_r2(x, y, a, b)
     # criar return
-    atv = b*np.exp(a*pont)
+    #atv = b*np.exp(a*pont)
     # Conversão dos coeficientes (se necessário)
     b = np.exp(b)
     # Gráficos
     linha = b*np.exp(a*x)
     # criar file text
-    return a, b, r2
+    return 0, a, b, r2
 
 
-def geometrico(x, y, pont):
+def geometrico(x, y):
 
     y = np.log(y)
 
@@ -138,12 +137,12 @@ def geometrico(x, y, pont):
     # Gráficos
     linha = b*a**x
     # criar return
-    atv = b*a**pont
+    #atv = b*a**pont
     # criar file text
-    return a, b, r2
+    return 0, a, b, r2
 
 
-def polinomial(x, y, pont, grau=2):
+def polinomial(x, y, grau=2):
 
     n = grau + 1
     mA = np.zeros((n, n))
@@ -155,13 +154,14 @@ def polinomial(x, y, pont, grau=2):
         mB[i] = (y * (x**(i))).sum()
 
     resul = np.linalg.solve(mA, mB)
-    atv = np.sum(c*(pont**i)for i, c in enumerate(resul))
+    a,b,c = resul
+    #atv = np.sum(c*(pont**i)for i, c in enumerate(resul))
     fx = np.sum(c*(x**i)for i, c in enumerate(resul))
     ym = np.mean(y)
     r2 = np.sum((fx - ym)**2) / np.sum((y - ym)**2)
     linha = fx
 
-    return resul, r2
+    return a,b,c, r2
 
 
 

@@ -64,7 +64,7 @@ def lin(x, y, pont):
     # Gráficos
     linha = a*x, y + b
     # criar file text
-    return atv
+    return a, b, r2
 
     # formar tabela log
 
@@ -82,7 +82,7 @@ def logaritmo(x, y, pont):
     # Gráficos
     linha = a*np.log(x) + b
     # criar file text
-    return atv
+    return a, b, r2
 
 
 def potencial(x, y, pont):
@@ -101,7 +101,7 @@ def potencial(x, y, pont):
     # Gráficos
     linha = a*x + b
     # criar file text
-    return atv
+    return a, b, r2
 
 
 def exponencial(x, y, pont):
@@ -121,7 +121,7 @@ def exponencial(x, y, pont):
     # Gráficos
     linha = b*np.exp(a*x)
     # criar file text
-    return atv
+    return a, b, r2
 
 
 def geometrico(x, y, pont):
@@ -140,7 +140,7 @@ def geometrico(x, y, pont):
     # criar return
     atv = b*a**pont
     # criar file text
-    return atv
+    return a, b, r2
 
 
 def polinomial(x, y, pont, grau=2):
@@ -161,15 +161,20 @@ def polinomial(x, y, pont, grau=2):
     r2 = np.sum((fx - ym)**2) / np.sum((y - ym)**2)
     linha = fx
 
-    return atv
+    return resul, r2
+
 
 
 """
 
-
-x = np.array([1, 2, 3, 4, 5])
-y = np.array([2, 4, 5, 4, 5])
+x = np.array([1.5, 2, 3, 4, 5])
+y = 345672334566777887578203*np.array([2, 4, 5, 4, 5])
 pont = 5
+
+
+
+x = x
+y = y
 
 resultado = lin(x,y,pont)
 print('Linear: ', resultado)
@@ -185,6 +190,5 @@ print('potencial: ', resultado)
 
 resultado = geometrico(x,y,pont)
 print('geometrico: ', resultado)
-
 
 """

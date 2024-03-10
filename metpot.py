@@ -1,7 +1,7 @@
 import numpy as np
 from mmq.MMQ import *
 #from lerMatriz import *
-
+import matplotlib.pyplot as plt
 
 def metodo_da_potencia(A, yo, max_it=10000,
                        p=0.00001):
@@ -142,13 +142,13 @@ def Aitken(A, yo, max_it=10000,
 
         i += 1
 
-    return [i, erro, ac_Autovls, z]
+    return [i, erro, autovls[:4] + ac_Autovls, z]
 # Example usage:
 A = np.array([[-4, 14, 0],
               [-5, 13, 0],
               [-1, 0, 2]])
 
-prec = 1e-6
+prec = 1e-4
 max_iter = 10000
 
 n = A.shape[0]
@@ -159,3 +159,4 @@ yo = np.ones(n)
 i, erro, autovalores, autovetor = metodo_da_potencia(A, yo, p  = prec)
 
 i_aitken, erro_aitken, autovalores_aitken, autovetor_aitken = Aitken(A, yo, p  = prec)
+

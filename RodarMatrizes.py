@@ -26,8 +26,8 @@ coluna_erro = []
 
 #MP = ['Metodo da Potencia', 'MMQ_Linear', 'MMQ_Logaritmo', 'MMQ_Exponencial', 'MMQ_Potencial', 'MMQ_Geometrico', 'MMQ_Polinomial']
 
-metodosDaPotencia = {'Metodo da Potencia': metodo_da_potencia,
-         'Aitken': Aitken
+metodosDaPotencia = {'MP': metodo_da_potencia,
+         'MP_Aitken': Aitken
          }
 
 metodoMinQua = {
@@ -47,7 +47,7 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-caminho = 'matrizes/slot01/'
+caminho = 'matrizes/slot11/'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 
@@ -90,8 +90,15 @@ for arquivo in arquivos_na_pasta:
             coluna_parametro_ind.append(p0)
             coluna_r2.append(r2)
 
+
+        graf, eix = plt.subplots()
+        eix.scatter(np.arange(1,i), autovls[1:])
+        eix.set_xlabel('Iterações')
+        eix.set_ylabel('Autovalores')
+        graf.savefig(arquivo+'_' + nomeMetodo +'.png')
+
             
-                
+            
 
 
 
@@ -122,10 +129,10 @@ df1 = pd.DataFrame(dados1)
 
 df2 = pd.DataFrame(dados2)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot01/')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot11/')
 
-df1.to_excel('resultados/resultados_slot01.xlsx')
+df1.to_excel('resultados/resultados_slot11.xlsx')
 
-df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot01/')
+df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot11/')
 
-df2.to_excel('resultados/comportamentoMMQ_slot01.xlsx')
+df2.to_excel('resultados/comportamentoMMQ_slot11.xlsx')

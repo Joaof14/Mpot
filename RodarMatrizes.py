@@ -47,7 +47,7 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-caminho = 'matrizes/slot01/'
+caminho = 'matrizes/slot11/'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 
@@ -72,26 +72,25 @@ for arquivo in arquivos_na_pasta:
         coluna_acelera.append(nomeMetodo)
 
         inicio = time.time()
-        i, e, autovalor, autovls = metodo(A,yo, p=0.0001)
+        i, e, autovls, autovetor = metodo(A,yo, p=0.00001)
         fim = time.time()
         coluna_ite.append(i)
-        coluna_autovalor.append(autovalor)
+        coluna_autovalor.append(autovls[-1])
         
         coluna_tempo.append(fim - inicio)
         
-        for ajuste, mmq in metodoMinQua:
-            try:
-                coluna_ajuste.append(ajuste)
-                coluna_nomes2.append(arquivo)
-                coluna_metodo2.append(nomeMetodo)
-                p2, p1, p0, r2 = ajuste(np.arange(1, i+1), autovls)
-                
+        for ajuste, mmq in metodoMinQua.items():
+            
+            coluna_ajuste.append(ajuste)
+            coluna_nomes2.append(arquivo)
+            coluna_metodo2.append(nomeMetodo)
+            p2, p1, p0, r2 = mmq(np.arange(1, i+1), autovls)
+            coluna_parametro_seg_grau.append(p2)
+            coluna_parametro_p_grau.append(p1)
+            coluna_parametro_ind.append(p0)
+            coluna_r2.append(r2)
 
-            except:
-                coluna_parametro_seg_grau.append('erro')
-                coluna_parametro_p_grau.append('erro')
-                coluna_parametro_ind.append('p0')
-                coluna_r2.append('r2')
+            
                 
 
 
@@ -123,10 +122,10 @@ df1 = pd.DataFrame(dados1)
 
 df2 = pd.DataFrame(dados2)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot01/')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot08/')
 
 df1.to_excel('resultados/analise/resultados.xlsx')
 
-df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot01/')
+df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot08/')
 
-df2.to_excel('resultados/analise/comportamentoMMQ.xlsx')
+df2.to_excel('resultados/comportamentoMMQ.xlsx')

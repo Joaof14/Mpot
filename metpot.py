@@ -142,7 +142,7 @@ def Aitken(A, yo, max_it=10000,
 
         i += 1
 
-    return [i, erro, autovls[:4] + ac_Autovls, z]
+    return [i, erro, autovls[:3] + ac_Autovls, z]
 # Example usage:
 """
 A = np.array([[-4, 14, 0],

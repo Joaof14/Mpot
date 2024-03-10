@@ -47,7 +47,7 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-caminho = 'matrizes/slot11/'
+caminho = 'matrizes/slot01/'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 
@@ -122,10 +122,10 @@ df1 = pd.DataFrame(dados1)
 
 df2 = pd.DataFrame(dados2)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot08/')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot01/')
 
-df1.to_excel('resultados/analise/resultados.xlsx')
+df1.to_excel('resultados/analise/resultados_slot01.xlsx')
 
-df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot08/')
+df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot01/')
 
-df2.to_excel('resultados/comportamentoMMQ.xlsx')
+df2.to_excel('resultados/comportamentoMMQ_slot01.xlsx')

@@ -124,7 +124,7 @@ df2 = pd.DataFrame(dados2)
 
 df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot01/')
 
-df1.to_excel('resultados/analise/resultados_slot01.xlsx')
+df1.to_excel('resultados/resultados_slot01.xlsx')
 
 df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot01/')
 

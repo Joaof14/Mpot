@@ -92,9 +92,9 @@ for arquivo in arquivos_na_pasta:
 
 
         graf, eix = plt.subplots()
-        eix.scatter(np.arange(1,i), autovls[1:])
+        eix.scatter(np.arange(1,i), np.array(autovls[1:])/(10**9))
         eix.set_xlabel('Iterações')
-        eix.set_ylabel('Autovalores')
+        eix.set_ylabel('Autovalores (x 10⁹)')
         eix.set_title(arquivo[21:-4])
         eix.ticklabel_format(style='plain', axis='y')
         graf.savefig(arquivo+'_' + nomeMetodo +'.png')
@@ -104,6 +104,15 @@ for arquivo in arquivos_na_pasta:
 
 
 """
+fig, ax = plt.subplots()
+ax.scatter(np.arange(1, i), autovls[1:])
+ax.set_xlabel('Iterações')
+ax.set_ylabel('Autovalores')
+ax.set_title('Título do Gráfico')
+ax.ticklabel_format(style='plain', axis='y')  # Removendo a notação científica do eixo y
+
+# Formatando os valores do eixo y com 4 casas decimais
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:.4f}".format(x)))
 
 dados1 = {
     'Matriz': coluna_nomes,

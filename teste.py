@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 
 
-arquivo = 'matrizes/slot_artigo/bcsstk27.mtx'
+arquivo = 'matrizes/slot_artigo/bcsstk25.mtx'
 
 matriz = scipy.io.mmread(arquivo)
 matriz.A
@@ -24,9 +24,9 @@ i, e, autovls, autovetor = metodo_da_potencia(A,yo, p=0.00001)
 
 
 graf, eix = plt.subplots()
-eix.scatter(np.arange(1,i), np.array(autovls[1:])/(10**2))
+eix.scatter(np.arange(1,i), np.array(autovls[1:])/(10**11))
 eix.set_xlabel('Iterações')
-eix.set_ylabel('Autovalores (x10²)')
+eix.set_ylabel('Autovalores (x10¹¹)')
 eix.set_title(arquivo[21:-4])
 eix.ticklabel_format(style='plain', axis='y')
 graf.show()

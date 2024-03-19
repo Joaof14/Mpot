@@ -47,52 +47,55 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-caminho = 'matrizes/slot11/'
-arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
+slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
+
+for slot in slots:
+    caminho = 'matrizes/' + slot + '/'
+    arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 
 
-for arquivo in arquivos_na_pasta:
-    ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
-    matriz = scipy.io.mmread(arquivo)
-    matriz.A
-    A = np.array(matriz.A)
-    n = A.shape[0]
-    yo = np.ones(n)
-    
-
-
-
-    for nomeMetodo, metodo in metodosDaPotencia.items():
-
-        coluna_nomes.append(arquivo)
-        coluna_ordem.append(ordem)
-        coluna_campo.append(campo)
-        coluna_simetria.append(simetria)
-        coluna_acelera.append(nomeMetodo)
-
-        inicio = time.time()
-        i, e, autovls, autovetor = metodo(A,yo, p=0.00001)
-        fim = time.time()
-        coluna_ite.append(i)
-        coluna_autovalor.append(autovls[-1])
+    for arquivo in arquivos_na_pasta:
+        ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
+        matriz = scipy.io.mmread(arquivo)
+        matriz.A
+        A = np.array(matriz.A)
+        n = A.shape[0]
+        yo = np.ones(n)
         
-        coluna_tempo.append(fim - inicio)
-        
-        for ajuste, mmq in metodoMinQua.items():
+
+
+
+        for nomeMetodo, metodo in metodosDaPotencia.items():
+
+            coluna_nomes.append(arquivo[17:])
+            coluna_ordem.append(ordem)
+            coluna_campo.append(campo)
+            coluna_simetria.append(simetria)
+            coluna_acelera.append(nomeMetodo)
+
+            inicio = time.time()
+            i, e, autovls, autovetor = metodo(A,yo, p=0.00001)
+            fim = time.time()
+            coluna_ite.append(i)
+            coluna_autovalor.append(autovls[-1])
             
-            coluna_ajuste.append(ajuste)
-            coluna_nomes2.append(arquivo)
-            coluna_metodo2.append(nomeMetodo)
-            try:
-                p2, p1, p0, r2 = mmq(np.arange(5, i+1), autovls[4:])
-            except:
-                p2, p1, p0, r2 = ['erro', 'erro', 'erro', 'erro']
+            coluna_tempo.append(fim - inicio)
             
-            coluna_parametro_seg_grau.append(p2)
-            coluna_parametro_p_grau.append(p1)
-            coluna_parametro_ind.append(p0)
-            coluna_r2.append(r2)
+            for ajuste, mmq in metodoMinQua.items():
+                
+                coluna_ajuste.append(ajuste)
+                coluna_nomes2.append(arquivo)
+                coluna_metodo2.append(nomeMetodo)
+                try:
+                    p2, p1, p0, r2 = mmq(np.arange(5, i+1), autovls[4:])
+                except:
+                    p2, p1, p0, r2 = ['erro', 'erro', 'erro', 'erro']
+                
+                coluna_parametro_seg_grau.append(p2)
+                coluna_parametro_p_grau.append(p1)
+                coluna_parametro_ind.append(p0)
+                coluna_r2.append(r2)
 
 
 
@@ -139,11 +142,8 @@ df1 = pd.DataFrame(dados1)
 
 df2 = pd.DataFrame(dados2)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot11/')
 
-df1.to_excel('resultados/resultados_slot11.xlsx')
+df1.to_excel('resultados/resultados_preliminares.xlsx')
 
-df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot11/')
-
-df2.to_excel('resultados/comportamentoMMQ_slot11.xlsx')
+df2.to_excel('resultados/comportamentoMMQ_preliminares.xlsx')
 

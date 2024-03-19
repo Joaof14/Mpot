@@ -47,7 +47,7 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-caminho = 'matrizes/slot11/'
+caminho = 'matrizes/slot_artigo/'
 arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
 
 
@@ -92,16 +92,27 @@ for arquivo in arquivos_na_pasta:
 
 
         graf, eix = plt.subplots()
-        eix.scatter(np.arange(1,i), autovls[1:])
+        eix.scatter(np.arange(1,i), np.array(autovls[1:])/(10**9))
         eix.set_xlabel('Iterações')
-        eix.set_ylabel('Autovalores')
+        eix.set_ylabel('Autovalores (x 10⁹)')
+        eix.set_title(arquivo[21:-4])
+        eix.ticklabel_format(style='plain', axis='y')
         graf.savefig(arquivo+'_' + nomeMetodo +'.png')
 
             
             
 
 
+"""
+fig, ax = plt.subplots()
+ax.scatter(np.arange(1, i), autovls[1:])
+ax.set_xlabel('Iterações')
+ax.set_ylabel('Autovalores')
+ax.set_title('Título do Gráfico')
+ax.ticklabel_format(style='plain', axis='y')  # Removendo a notação científica do eixo y
 
+# Formatando os valores do eixo y com 4 casas decimais
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:.4f}".format(x)))
 
 dados1 = {
     'Matriz': coluna_nomes,
@@ -129,10 +140,12 @@ df1 = pd.DataFrame(dados1)
 
 df2 = pd.DataFrame(dados2)
 
-df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot11/')
+df1['Matriz'] = df1['Matriz'].str.lstrip('matrizes/slot_artigo/')
 
-df1.to_excel('resultados/resultados_slot11.xlsx')
+df1.to_excel('resultados/resultados_slot_artigo.xlsx')
 
-df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot11/')
+df2['Matriz'] = df2['Matriz'].str.lstrip('matrizes/slot_artigo/')
 
-df2.to_excel('resultados/comportamentoMMQ_slot11.xlsx')
+df2.to_excel('resultados/comportamentoMMQ_slot_artigo.xlsx')
+
+""" 

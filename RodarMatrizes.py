@@ -68,7 +68,7 @@ for slot in slots:
 
         for nomeMetodo, metodo in metodosDaPotencia.items():
 
-            coluna_nomes.append(arquivo[17:])
+            coluna_nomes.append(arquivo)
             coluna_ordem.append(ordem)
             coluna_campo.append(campo)
             coluna_simetria.append(simetria)
@@ -142,6 +142,7 @@ df1 = pd.DataFrame(dados1)
 
 df2 = pd.DataFrame(dados2)
 
+                       
 
 df1.to_excel('resultados/resultados_preliminares.xlsx')
 

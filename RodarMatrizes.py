@@ -93,11 +93,11 @@ for slot in slots:
                     p2, p1, p0, r2, linha = mmq(np.arange(1, i+1), autovls)
 
                     graf, eix = plt.subplots()
-                    eix.scatter(np.arange(1,i), autovls[1:])
+                    eix.scatter(np.arange(1,i), autovls[1:],c = 'r')
                     eix.set_xlabel('Iterações')
                     eix.set_ylabel('Autovalores')
                     eix.set_title(arquivo[21:-4])
-                    eix.plot(linha)
+                    eix.plot(linha, c = 'black')
                     eix.ticklabel_format(style='plain', axis='y')
                     graf.savefig(arquivo+'_' + nomeMetodo + '-' + ajuste +'.png')
 

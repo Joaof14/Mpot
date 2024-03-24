@@ -45,8 +45,8 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-#slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
-slots = ['slot_artigo']
+slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
+#slots = ['slot_artigo']
 
 for slot in slots:
     caminho = 'matrizes/' + slot + '/'
@@ -89,7 +89,7 @@ for slot in slots:
                 
                 try:
                     p2, p1, p0, r2, linha = mmq(np.arange(1, i+1), autovls)
-
+                    """ 
                     graf, eix = plt.subplots()
                     eix.scatter(np.arange(1,i), autovls[1:],c = 'r')
                     eix.set_xlabel('Iterações')
@@ -99,6 +99,8 @@ for slot in slots:
                     eix.ticklabel_format(style='plain', axis='y')
                     graf.savefig(arquivo+'_' + nomeMetodo + '-' + ajuste +'.png')
 
+                    """
+                    
                 except:
                     p2, p1, p0, r2 = ['erro', 'erro', 'erro', 'erro']
                 

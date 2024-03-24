@@ -7,7 +7,7 @@ import os
 import glob
 import pandas as pd
 import time
-import matplotlib.pyplot as plt
+from grafico import plotar_grafico
 
 
 
@@ -45,8 +45,8 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
-#slots = ['slot_artigo']
+#slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
+slots = ['slot_artigo']
 
 for slot in slots:
     caminho = 'matrizes/' + slot + '/'
@@ -89,15 +89,11 @@ for slot in slots:
                 
                 try:
                     p2, p1, p0, r2, linha = mmq(np.arange(1, i+1), autovls)
+
+                    plotar_grafico(np.arange(1,i), autovls[1:], linha = linha, arquivo= arquivo, nomeMetodo= nomeMetodo, ajuste=ajuste)
+
                     """ 
-                    graf, eix = plt.subplots()
-                    eix.scatter(np.arange(1,i), autovls[1:],c = 'r')
-                    eix.set_xlabel('Iterações')
-                    eix.set_ylabel('Autovalores')
-                    eix.set_title(arquivo[21:-4])
-                    eix.plot(linha, c = 'black')
-                    eix.ticklabel_format(style='plain', axis='y')
-                    graf.savefig(arquivo+'_' + nomeMetodo + '-' + ajuste +'.png')
+                    
 
                     """
                     

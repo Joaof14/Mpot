@@ -140,7 +140,7 @@ def geometrico(x, y):
     a = np.exp(a)
     b = np.exp(b)
     # Gráficos
-    linha = b*a**x
+    linha = b*x**a
     # criar return
     #atv = b*a**pont
     # criar file text

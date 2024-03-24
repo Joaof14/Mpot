@@ -54,45 +54,48 @@ def plotgrafico( x,  y , linha):
 
 
 def lin(x, y):
+    x_ = x
+    y_ = y
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # criar return
     #atv = a*pont + b
     # Gráficos
-    linha = a*x, y + b
+    linha = a*x + b
     # criar file text
-    return 0, a, b, r2
+    return 0, a, b, r2, linha
 
     # formar tabela log
 
 
 def logaritmo(x, y):
 
-    x = np.log(x)
+    x_ = np.log(x)
+    y_ = y
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # criar return
     # Gráficos
-    #linha = a*np.log(x) + b
+    linha = a*np.log(x) + b
     # criar file text
-    return 0, a, b, r2
+    return 0, a, b, r2, linha
 
 
 def potencial(x, y):
 
-    x = np.log(x)
-    y = np.log(y)
+    x_ = np.log(x)
+    y_ = np.log(y)
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # criar return
     #atv = b*pont**a
     # Conversão dos coeficientes
@@ -100,19 +103,20 @@ def potencial(x, y):
     # Gráficos
     linha = a*x + b
     # criar file text
-    return 0, a, b, r2
+    return 0, a, b, r2, linha
 
 
 def exponencial(x, y):
 
-    y = np.log(y)
+    y_ = np.log(y)
+    x_ = x
 
     # Transformações (g2 e gj)
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # criar return
     #atv = b*np.exp(a*pont)
     # Conversão dos coeficientes (se necessário)
@@ -120,17 +124,18 @@ def exponencial(x, y):
     # Gráficos
     linha = b*np.exp(a*x)
     # criar file text
-    return 0, a, b, r2
+    return 0, a, b, r2, linha
 
 
 def geometrico(x, y):
 
-    y = np.log(y)
+    y_ = np.log(y)
+    x_ = x
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # Conversão dos coeficientes (se necessário)
     a = np.exp(a)
     b = np.exp(b)
@@ -139,7 +144,7 @@ def geometrico(x, y):
     # criar return
     #atv = b*a**pont
     # criar file text
-    return 0, a, b, r2
+    return 0, a, b, r2, linha
 
 
 def polinomial(x, y, grau=2):
@@ -161,7 +166,7 @@ def polinomial(x, y, grau=2):
     r2 = np.sum((fx - ym)**2) / np.sum((y - ym)**2)
     linha = fx
 
-    return a,b,c, r2
+    return a,b,c, r2, linha
 
 
 

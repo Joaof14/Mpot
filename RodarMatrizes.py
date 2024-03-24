@@ -27,7 +27,7 @@ coluna_erro = []
 #MP = ['Metodo da Potencia', 'MMQ_Linear', 'MMQ_Logaritmo', 'MMQ_Exponencial', 'MMQ_Potencial', 'MMQ_Geometrico', 'MMQ_Polinomial']
 
 metodosDaPotencia = {'MP': metodo_da_potencia,
-         'MP_Aitken': Aitken
+         #'MP_Aitken': Aitken
          }
 
 metodoMinQua = {
@@ -47,7 +47,8 @@ coluna_ajuste = []
 coluna_r2 = []
 coluna_erroMMQ = []
 
-slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
+#slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
+slots = ['slot_artigo']
 
 for slot in slots:
     caminho = 'matrizes/' + slot + '/'
@@ -87,8 +88,19 @@ for slot in slots:
                 coluna_ajuste.append(ajuste)
                 coluna_nomes2.append(arquivo)
                 coluna_metodo2.append(nomeMetodo)
+                
                 try:
-                    p2, p1, p0, r2 = mmq(np.arange(5, i+1), autovls[4:])
+                    p2, p1, p0, r2, linha = mmq(np.arange(1, i+1), autovls)
+
+                    graf, eix = plt.subplots()
+                    eix.scatter(np.arange(1,i), autovls[1:])
+                    eix.set_xlabel('Iterações')
+                    eix.set_ylabel('Autovalores')
+                    eix.set_title(arquivo[21:-4])
+                    eix.plot(linha)
+                    eix.ticklabel_format(style='plain', axis='y')
+                    graf.savefig(arquivo+'_' + nomeMetodo + '-' + ajuste +'.png')
+
                 except:
                     p2, p1, p0, r2 = ['erro', 'erro', 'erro', 'erro']
                 
@@ -99,21 +111,6 @@ for slot in slots:
 
 
 
-            
-            
-
-
-""" 
-fig, ax = plt.subplots()
-ax.scatter(np.arange(1, i), autovls[1:])
-ax.set_xlabel('Iterações')
-ax.set_ylabel('Autovalores')
-ax.set_title('Título do Gráfico')
-ax.ticklabel_format(style='plain', axis='y')  # Removendo a notação científica do eixo y
-
-# Formatando os valores do eixo y com 4 casas decimais
-ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:.4f}".format(x)))
-"""
 
 
 dados1 = {

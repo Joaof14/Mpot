@@ -33,8 +33,6 @@ metodosDaPotencia = {'MP': metodo_da_potencia,
 metodoMinQua = {
     'Linear': lin,
     'Logaritmo': logaritmo,
-    'Exponencial': exponencial,
-    'Geometrico': geometrico,
     'Potencial': potencial,
     'Polinomial': polinomial
 }

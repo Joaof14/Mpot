@@ -101,7 +101,7 @@ def potencial(x, y):
     # Conversão dos coeficientes
     b = np.exp(b)
     # Gráficos
-    linha = a*x + b
+    linha = b*x**a
     # criar file text
     return 0, a, b, r2, linha
 

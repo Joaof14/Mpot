@@ -23,9 +23,9 @@ def plotar_grafico(x, y, linha, arquivo, nomeMetodo, ajuste):
     else:
         eix.set_ylabel('Autovalores')
 
-    
+    eix.grid(True, alpha = 0.35)
     eix.scatter(x,y,c = 'r', label = 'Autovalores do Método da Potência')
     eix.plot(linha, c = 'black', label = label_ajuste)
-    eix.legend(fontsize='small')
+    eix.legend(fontsize='small', loc='lower right')
     eix.ticklabel_format(style='plain', axis='y')
     graf.savefig(arquivo+'_' + nomeMetodo + '-' + ajuste +'.png')

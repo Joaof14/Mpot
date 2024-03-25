@@ -90,11 +90,11 @@ for slot in slots:
                 try:
                     p2, p1, p0, r2, linha = mmq(np.arange(1, i+1), autovls)
 
-                    plotar_grafico(np.arange(1,i), autovls[1:], linha = linha, arquivo= arquivo, nomeMetodo= nomeMetodo, ajuste=ajuste)
+                    
 
                     
                     """ 
-                    
+                    plotar_grafico(np.arange(1,i), autovls[1:], linha = linha, arquivo= arquivo, nomeMetodo= nomeMetodo, ajuste=ajuste)
                     
                     """
                     

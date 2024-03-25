@@ -3,7 +3,7 @@ from math import log10
 import numpy as np
 
 def plotar_grafico(x, y, linha, arquivo, nomeMetodo, ajuste):
-    
+    label_ajuste = 'ajuste ' + ajuste
     
     y = np.array(y)
     linha = np.array(linha)
@@ -24,7 +24,8 @@ def plotar_grafico(x, y, linha, arquivo, nomeMetodo, ajuste):
         eix.set_ylabel('Autovalores')
 
     
-    eix.scatter(x,y,c = 'r')
-    eix.plot(linha, c = 'black')
+    eix.scatter(x,y,c = 'r', label = 'Autovalores do Método da Potência')
+    eix.plot(linha, c = 'black', label = label_ajuste)
+    eix.legend(fontsize='small')
     eix.ticklabel_format(style='plain', axis='y')
     graf.savefig(arquivo+'_' + nomeMetodo + '-' + ajuste +'.png')

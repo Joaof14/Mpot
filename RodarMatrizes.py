@@ -92,9 +92,9 @@ for slot in slots:
 
                     
 
-                    
-                    """ 
                     plotar_grafico(np.arange(1,i), autovls[1:], linha = linha, arquivo= arquivo, nomeMetodo= nomeMetodo, ajuste=ajuste)
+                    """ 
+                    
                     
                     """
                     

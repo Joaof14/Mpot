@@ -3,6 +3,8 @@ from mmq.MMQ import *
 #from lerMatriz import *
 
 
+atv_ = 1
+
 def metodo_da_potencia(A, yo, maxit=10000,
                        p=0.00001):
     """
@@ -54,6 +56,7 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
                 # critério de parada da precisão
                 if erro < p:
+                    atv_ = autovalor
                     break
 
         # Cálculo de y com base no valor de z, tornando o vetor normalizado
@@ -66,7 +69,7 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
 
 def Aitken(A, yo, maxit=10000,
-           p=0.00001, inicio_acel=6):
+           p=0.00001, inicio_acel=4):
     
     
     """
@@ -149,7 +152,7 @@ def Aitken(A, yo, maxit=10000,
 
 
 def mp_mmq_linear(A, yo, maxit=10000,
-                  p=0.00001, inicio_acel=6):
+                  p=0.00001, inicio_acel=12):
 
     
     """
@@ -196,7 +199,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
                 #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
 
-                ac_Autovalor = lin(x=np.arange(i-5, i), y=autovls[-5:], pont=i)
+                ac_Autovalor = lin(x=np.arange(i-10, i), y=autovls[-10:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -231,7 +234,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
 
 def mp_mmq_logaritmo(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=6):
+                     p=0.00001, inicio_acel=12):
 
     
     """
@@ -281,7 +284,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
 
                 ac_Autovalor = logaritmo(
-                    x=np.arange(i-5, i), y=autovls[-5:], pont=i)
+                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -316,7 +319,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
 
 def mp_mmq_potencial(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=6):
+                     p=0.00001, inicio_acel=12):
 
     
     """
@@ -366,7 +369,7 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
 
                 ac_Autovalor = potencial(
-                    x=np.arange(i-5, i), y=autovls[-5:], pont=i)
+                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -401,7 +404,7 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
 
 def mp_mmq_exponencial(A, yo, maxit=10000,
-                       p=0.00001, inicio_acel=6):
+                       p=0.00001, inicio_acel=12):
 
     
     """
@@ -451,7 +454,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
 
                 ac_Autovalor = exponencial(
-                    x=np.arange(i-5, i), y=autovls[-5:], pont=i)
+                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -486,7 +489,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
 
 def mp_mmq_geometrico(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=6):
+                      p=0.00001, inicio_acel=12):
 
     
     """
@@ -532,7 +535,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
             if i >= inicio_acel:
                 ac_Autovalor = geometrico(
-                    x=np.arange(i-5, i), y=autovls[-5:], pont=i)
+                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -568,7 +571,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
 
 def mp_mmq_polinomial(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=6):
+                      p=0.00001, inicio_acel=12):
 
     
     """
@@ -618,7 +621,7 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
 
 
                 ac_Autovalor = polinomial(
-                    x=np.arange(i-5, i), y=autovls[-5:], pont=i)
+                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)

@@ -71,12 +71,13 @@ def lin(x, y, pont):
 
 def logaritmo(x, y, pont):
 
-    x = np.log(x)
+    x_ = np.log(x)
+    y_ = y
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # criar return
     atv = a*np.log(pont) + b
     # Gráficos
@@ -87,51 +88,53 @@ def logaritmo(x, y, pont):
 
 def potencial(x, y, pont):
 
-    x = np.log(x)
-    y = np.log(y)
+    x_ = np.log(x)
+    y_ = np.log(y)
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
-    # criar return
-    atv = b*pont**a
+    r2 = calcula_r2(x_, y_, a, b)
     # Conversão dos coeficientes
     b = np.exp(b)
     # Gráficos
-    linha = a*x + b
+    linha = b*x**a
+    # criar return
+    atv = b*pont**a
     # criar file text
     return atv
 
 
 def exponencial(x, y, pont):
 
-    y = np.log(y)
-
+    y_ = np.log(y)
+    x_ = x
     # Transformações (g2 e gj)
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
-    # criar return
-    atv = b*np.exp(a*pont)
+    r2 = calcula_r2(x_, y_, a, b)
+    
     # Conversão dos coeficientes (se necessário)
     b = np.exp(b)
     # Gráficos
     linha = b*np.exp(a*x)
     # criar file text
+    # criar return
+    atv = b*np.exp(a*pont)
     return atv
 
 
 def geometrico(x, y, pont):
 
-    y = np.log(y)
+    y_ = np.log(y)
+    x_ = x
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x, y_, a, b)
     # Conversão dos coeficientes (se necessário)
     a = np.exp(a)
     b = np.exp(b)
@@ -164,9 +167,9 @@ def polinomial(x, y, pont, grau=2):
     return atv
 
 
+
+
 """
-
-
 x = np.array([1, 2, 3, 4, 5])
 y = np.array([2, 4, 5, 4, 5])
 pont = 5
@@ -185,6 +188,5 @@ print('potencial: ', resultado)
 
 resultado = geometrico(x,y,pont)
 print('geometrico: ', resultado)
-
 
 """

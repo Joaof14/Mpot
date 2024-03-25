@@ -9,8 +9,7 @@ import glob
 import pandas as pd
 
 
-caminho = 'matrizes/'
-arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
+
 
 coluna_nomes = []
 coluna_acelera = []
@@ -27,38 +26,40 @@ acels = {'Nenhuma': metodo_da_potencia,
          'Aitken': Aitken,
           'MMQ_Linear': mp_mmq_linear,
           'MMQ_Logaritmo': mp_mmq_logaritmo ,
-          'MMQ_Exponencial': mp_mmq_exponencial ,
+          #'MMQ_Exponencial': mp_mmq_exponencial ,
           'MMQ_Potencial': mp_mmq_potencial ,
-          'MMQ_Geometrico': mp_mmq_geometrico ,
+          #'MMQ_Geometrico': mp_mmq_geometrico ,
           'MMQ_Polinomial': mp_mmq_polinomial ,
          }
 
 
-for arquivo in arquivos_na_pasta:
-    ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
-    matriz = scipy.io.mmread(arquivo)
-    matriz.A
-    A = np.array(matriz.A)
-    n = A.shape[1]
-    yo = np.ones(n)
+slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
 
-    for acel, metodo in acels.items():
+for slot in slots:
 
-        coluna_nomes.append(arquivo)
-        coluna_ordem.append(ordem)
-        coluna_campo.append(campo)
-        coluna_simetria.append(simetria)
-        coluna_acelera.append(acel)
-        try:
+    caminho = 'matrizes/' + slot + '/'
+    arquivos_na_pasta = glob.glob(os.path.join(caminho, '*'))
+
+    for arquivo in arquivos_na_pasta:
+        ordem, _, _, _, campo, simetria = scipy.io.mminfo(arquivo)
+        matriz = scipy.io.mmread(arquivo)
+        matriz.A
+        A = np.array(matriz.A)
+        n = A.shape[1]
+        yo = np.ones(n)
+
+        for acel, metodo in acels.items():
+
+            coluna_nomes.append(arquivo)
+            coluna_ordem.append(ordem)
+            coluna_campo.append(campo)
+            coluna_simetria.append(simetria)
+            coluna_acelera.append(acel)
+            
             i, e, autovalor = metodo(A, yo, p=0.00001)
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)
-
-        except:
-            coluna_ite.append('erro')
-            coluna_autovalor.append('erro')
-            coluna_erro.append('erro')
 
 
 dados = {

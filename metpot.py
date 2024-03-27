@@ -219,6 +219,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
+                    
                         #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
                         ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)

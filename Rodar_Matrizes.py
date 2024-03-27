@@ -66,7 +66,7 @@ for slot in slots:
 
             try:
                 inicio = time.time()
-                i, e, autovalor, autovls = metodo(A, yo, p=0.00001)
+                i, e, autovalor, autovls = metodo(A, yo, p=0.00000001)
                 fim = time.time()
                 coluna_ite.append(i)
                 coluna_autovalor.append(autovalor)
@@ -75,7 +75,8 @@ for slot in slots:
                 
                 if acel == 'Nenhuma':
                     graf, eix = plt.subplots()
-                    eix.scatter(np.arange(1,i), autovls[1:])
+                    eix.scatter(np.arange(i-7,i), autovls[i-7:])
+                    eix.set_title(arquivo[21:-4])
                     eix.set_xlabel('Iterações')
                     eix.set_ylabel('Autovalores')
                     

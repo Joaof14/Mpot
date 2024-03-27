@@ -31,6 +31,7 @@ acels = {'Nenhuma': metodo_da_potencia,
 
 #slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
 slots = ['slot200-300', 'slot400-500', 'slot600-700', 'slot700-800']
+#slots = ['slot200-300']
 
 for slot in slots:
 
@@ -71,13 +72,13 @@ for slot in slots:
                 coluna_autovalor.append(autovalor)
                 coluna_erro.append(e)
                 coluna_tempo.append(fim - inicio)
-                """
+                
                 if acel == 'Nenhuma':
                     graf, eix = plt.subplots()
                     eix.scatter(np.arange(1,i), autovls[1:])
                     eix.set_xlabel('Iterações')
                     eix.set_ylabel('Autovalores')
-                    graf.savefig(arquivo+'.png')"""
+                    
                 
 
             except:

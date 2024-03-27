@@ -30,8 +30,8 @@ acels = {'Nenhuma': metodo_da_potencia,
 
 
 #slots = ['slot01','slot02', 'slot03', 'slot04', 'slot06', 'slot09', 'slot10', 'slot11']
-slots = ['slot200-300', 'slot400-500', 'slot600-700', 'slot700-800']
-#slots = ['slot200-300']
+#slots = ['slot200-300', 'slot400-500', 'slot600-700', 'slot700-800']
+slots = ['slot200-300']
 
 for slot in slots:
 

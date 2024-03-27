@@ -54,16 +54,18 @@ def plotgrafico( x,  y , linha):
 
 
 def lin(x, y, pont):
+    x_ = x
+    y_ = y
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # criar return
     atv = a*pont + b
     # Gráficos
-    linha = a*x, y + b
-    # criar file text
+    linha = a*x + b
+    
     return atv
 
     # formar tabela log
@@ -71,75 +73,82 @@ def lin(x, y, pont):
 
 def logaritmo(x, y, pont):
 
-    x = np.log(x)
+    x_ = np.log(x)
+    y_ = y
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
-    # criar return
-    atv = a*np.log(pont) + b
+    r2 = calcula_r2(x_, y_, a, b)
+    
     # Gráficos
     linha = a*np.log(x) + b
-    # criar file text
+    
+    # criar return
+    atv = a*np.log(pont) + b
     return atv
 
 
 def potencial(x, y, pont):
 
-    x = np.log(x)
-    y = np.log(y)
+    x_ = np.log(x)
+    y_ = np.log(y)
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
-    # criar return
-    atv = b*pont**a
+    r2 = calcula_r2(x_, y_, a, b)
+    
     # Conversão dos coeficientes
     b = np.exp(b)
     # Gráficos
-    linha = a*x + b
-    # criar file text
+    linha = b*x**a
+
+    # criar return
+    atv = b*pont**a
+    
     return atv
 
 
 def exponencial(x, y, pont):
 
-    y = np.log(y)
+    y_ = np.log(y)
+    x_ = x
 
     # Transformações (g2 e gj)
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
-    # criar return
-    atv = b*np.exp(a*pont)
+    r2 = calcula_r2(x_, y_, a, b)
+    
     # Conversão dos coeficientes (se necessário)
     b = np.exp(b)
     # Gráficos
     linha = b*np.exp(a*x)
-    # criar file text
+    
+    # criar return
+    atv = b*np.exp(a*pont)
     return atv
 
 
 def geometrico(x, y, pont):
 
-    y = np.log(y)
+    y_ = np.log(y)
+    x_ = x
 
     # Calculos de coeficientes
-    a, b = calcula_reg(x, y)
+    a, b = calcula_reg(x_, y_)
     # Calculo r2
-    r2 = calcula_r2(x, y, a, b)
+    r2 = calcula_r2(x_, y_, a, b)
     # Conversão dos coeficientes (se necessário)
     a = np.exp(a)
     b = np.exp(b)
     # Gráficos
-    linha = b*a**x
+    linha = b*x**a
     # criar return
     atv = b*a**pont
-    # criar file text
+    
     return atv
 
 
@@ -155,21 +164,28 @@ def polinomial(x, y, pont, grau=2):
         mB[i] = (y * (x**(i))).sum()
 
     resul = np.linalg.solve(mA, mB)
-    atv = np.sum(c*(pont**i)for i, c in enumerate(resul))
+    a,b,c = resul
+   
     fx = np.sum(c*(x**i)for i, c in enumerate(resul))
     ym = np.mean(y)
     r2 = np.sum((fx - ym)**2) / np.sum((y - ym)**2)
     linha = fx
+    atv = np.sum(c*(pont**i)for i, c in enumerate(resul))
 
     return atv
 
 
+
 """
 
-
-x = np.array([1, 2, 3, 4, 5])
-y = np.array([2, 4, 5, 4, 5])
+x = np.array([1.5, 2, 3, 4, 5])
+y = 345672334566777887578203*np.array([2, 4, 5, 4, 5])
 pont = 5
+
+
+
+x = x
+y = y
 
 resultado = lin(x,y,pont)
 print('Linear: ', resultado)
@@ -185,6 +201,5 @@ print('potencial: ', resultado)
 
 resultado = geometrico(x,y,pont)
 print('geometrico: ', resultado)
-
 
 """

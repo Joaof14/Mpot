@@ -3,7 +3,7 @@ from math import log10
 import numpy as np
 
 def plotar_grafico(x, y, linha, arquivo, nomeMetodo, ajuste):
-    label_ajuste = 'ajuste ' + ajuste
+    label_ajuste = 'Função '+ ajuste
     
     y = np.array(y)
     linha = np.array(linha)

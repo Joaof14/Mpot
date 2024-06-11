@@ -34,7 +34,9 @@ metodoMinQua = {
     'Linear': lin,
     'Logarítmica': logaritmo,
     'Potencial': potencial,
-    'Polinomial': polinomial
+    'Polinomial': polinomial,
+    'exponencial': exponencial,
+    'geometrico': geometrico
 }
 coluna_nomes2 = []
 coluna_metodo2 = []

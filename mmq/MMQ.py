@@ -62,7 +62,7 @@ def lin(x, y, pont):
     # criar return
     atv = a*pont + b
     # Gráficos
-    linha = a*x, y + b
+    linha = a*x + b
     # criar file text
     return atv
 

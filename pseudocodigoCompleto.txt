@@ -20,22 +20,10 @@ função que executa o método das potencias(yo, n, ac):
             senão, se aceleração = 'MMQ_Linear' e iterações > n:
                 calcular autovalores com mmq linear
             
-            senão, se aceleração = 'MMQ_Log' e iterações > n:
-                calcular autovalores com MMQ_Log
-            
-            .
-            .
-            .
-
-
-
-            senão:
-             calcular autovalores da forma padrão
-
-
 
         se iterações maior que 1 calcular erro:
-            resultado = autovalor de menor erro apresentado
+            erro = (autovalor_aceleracao - autovalor mp) / (autovalor_aceleracao)
+            resultado = autovalor erro menor que precisao
 
         
 

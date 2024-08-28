@@ -17,8 +17,8 @@ função que executa o método das potencias(yo, n, ac):
         
                 calcular autovalores aitken
 
-            senão, se aceleração = 'MMQ_Linear' e iterações > n:
-                calcular autovalores com mmq linear
+            senão:
+                calcular autovalores com mmq
             
 
         se iterações maior que 1 calcular erro:

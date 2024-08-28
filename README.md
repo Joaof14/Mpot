@@ -1,0 +1,1 @@
+aplicado em somente 9 matrizes

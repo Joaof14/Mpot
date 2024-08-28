@@ -6,6 +6,15 @@ import os
 import glob
 import pandas as pd
 
+
+#defina estrategia: 
+#o inicio deve ser maior que a quantidade de pontos estimados
+inicio = 6
+quantidade = 5
+
+
+
+
 # Listas para armazenar os resultados
 coluna_nomes = []       # Nome do arquivo
 coluna_acelera = []     # Método de aceleração
@@ -59,7 +68,7 @@ for slot in slots:
             coluna_acelera.append(acel)
             
             # Executa o método de aceleração e armazena os resultados
-            i, e, autovalor, autovls = metodo(A, yo, p=0.00001)
+            i, e, autovalor, autovls = metodo(A, yo, p=0.00001, inicio_acel=inicio, pontos = - quantidade)
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)
@@ -78,6 +87,6 @@ dados = {
 
 # Cria um DataFrame do Pandas com os dados
 df1 = pd.DataFrame(dados)
-
+estrategia = f"Inicio{inicio}-Ultimos{quantidade}"
 # Salva os resultados em um arquivo Excel
-df1.to_excel('resultados.xlsx')
+df1.to_excel('resultados' + estrategia + '.xlsx')

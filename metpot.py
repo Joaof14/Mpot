@@ -5,7 +5,7 @@ from mmq.MMQ import *
 autovalor_global = 1
 
 def metodo_da_potencia(A, yo, maxit=10000,
-                       p=0.00001):
+                       p=0.00001, inicio_acel=None, pontos = None):
     """
 
    Método das potências para calcular autovalores de um determinado matriz.
@@ -69,7 +69,7 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
 
 def Aitken(A, yo, maxit=10000,
-           p=0.00001, inicio_acel=6):
+           p=0.00001, inicio_acel=6, pontos = None):
     
     
     """
@@ -97,6 +97,8 @@ def Aitken(A, yo, maxit=10000,
     autovls = []
     erros = []
     ac_Autovls = []
+
+    inicio_acel = 4
 
     i = 1
 

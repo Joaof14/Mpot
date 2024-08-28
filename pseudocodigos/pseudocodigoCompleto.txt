@@ -1,6 +1,3 @@
-testar melhor estratégia
-
-
 yo - estimativa inicial
 n = ponto inicial da aplicação da aceleração
 ac = tipo de aceleração usada
@@ -14,34 +11,20 @@ função que executa o método das potencias(yo, n, ac):
 
         se iterações > 0 :
             se iterações >= n e aceleração = aitken:
-        
+
                 calcular autovalores aitken
 
-            senão, se aceleração = 'MMQ_Linear' e iterações > n:
-                calcular autovalores com mmq linear
-            
-            senão, se aceleração = 'MMQ_Log' e iterações > n:
-                calcular autovalores com MMQ_Log
-            
-            .
-            .
-            .
-
-
-
             senão:
-             calcular autovalores da forma padrão
-
+                calcular autovalores com mmq 
 
 
         se iterações maior que 1 calcular erro:
-            resultado = autovalor de menor erro apresentado
+            erro = (autovalor_aceleracao - autovalor_aceleracao_anterior) / (autovalor_aceleracao_anterior)
+            resultado = autovalor erro menor que precisao
 
-        
+
 
         calcular y
-
-
 
 
 qual o n, qual o m

@@ -2,8 +2,7 @@ import numpy as np
 from mmq.MMQ import *
 #from lerMatriz import *
 
-
-atv_ = 1
+autovalor_global = 1
 
 def metodo_da_potencia(A, yo, maxit=10000,
                        p=0.00001):
@@ -56,25 +55,26 @@ def metodo_da_potencia(A, yo, maxit=10000,
 
                 # critério de parada da precisão
                 if erro < p:
-                    atv_ = autovalor
+                    autovalor_global = autovalor
+                    
                     break
 
         # Cálculo de y com base no valor de z, tornando o vetor normalizado
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 #Pot(A, yo)
 
 
 def Aitken(A, yo, maxit=10000,
-           p=0.00001, inicio_acel=4):
+           p=0.00001, inicio_acel=6):
     
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma Matriz A usando o método de Aitken.
 
     :param A: matriz A.
     
@@ -136,7 +136,7 @@ def Aitken(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
                     autovalor
 
@@ -148,15 +148,16 @@ def Aitken(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_linear(A, yo, maxit=10000,
-                  p=0.00001, inicio_acel=12):
+                  p=0.00001, inicio_acel=6, pontos = -5):
 
     
     """
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+   
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -199,7 +200,7 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
                 #Chama mmq linear com os ultimos 5 autovalores e iterações para descobrir autovalor resultante
 
-                ac_Autovalor = lin(x=np.arange(i-10, i), y=autovls[-10:], pont=i)
+                ac_Autovalor = lin(x=np.arange(i+pontos, i), y=autovls[+pontos:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -218,9 +219,11 @@ def mp_mmq_linear(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                    
+                        #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -230,16 +233,16 @@ def mp_mmq_linear(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_logaritmo(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=12):
+                     p=0.00001, inicio_acel=6, pontos = -5):
 
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -252,6 +255,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
     :param inicio_acel: índice para começar a aplicar aceleração.
     
     :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
 
     """
     
@@ -284,7 +288,7 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
 
                 ac_Autovalor = logaritmo(
-                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
+                    x=np.arange(i+pontos, i), y=autovls[+pontos:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -303,9 +307,10 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+
 
                 # critério de parada da precisão
                 if erro < p:
@@ -315,18 +320,18 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_potencial(A, yo, maxit=10000,
-                     p=0.00001, inicio_acel=12):
+                     p=0.00001, inicio_acel=6, pontos = -5):
 
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
-    :param A: matriz de operador linear A.
+    :param A: matriz A.
     
     :param yo: vetor de autovetores iniciais.
     
@@ -369,7 +374,7 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
 
                 ac_Autovalor = potencial(
-                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
+                    x=np.arange(i+pontos, i), y=autovls[+pontos:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -388,9 +393,10 @@ def mp_mmq_potencial(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -400,16 +406,16 @@ def mp_mmq_potencial(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_exponencial(A, yo, maxit=10000,
-                       p=0.00001, inicio_acel=12):
+                       p=0.00001, inicio_acel=6, pontos = -5):
 
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -454,7 +460,7 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
 
                 ac_Autovalor = exponencial(
-                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
+                    x=np.arange(i+pontos, i), y=autovls[+pontos:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -473,9 +479,10 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -485,16 +492,16 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_geometrico(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=12):
+                      p=0.00001, inicio_acel=6, pontos = -5):
 
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
     :param A: matriz A.
     
@@ -507,6 +514,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
     :param inicio_acel: índice para começar a aplicar aceleração.
     
     :return: tupla contendo o número de iterações, o erro da iteração e o autovalor encontrado.
+
 
     """
     
@@ -535,7 +543,7 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
             if i >= inicio_acel:
                 ac_Autovalor = geometrico(
-                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
+                    x=np.arange(i+pontos, i), y=autovls[+pontos:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -555,9 +563,10 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
                     erros.append(erro)
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -567,18 +576,18 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 
 
 def mp_mmq_polinomial(A, yo, maxit=10000,
-                      p=0.00001, inicio_acel=12):
+                      p=0.00001, inicio_acel=6, pontos = -5):
 
     
     """
 
-    Função para encontrar o autovalor dominante de um operador linear A usando o método de Aitken.
+    Função para encontrar o autovalor dominante de uma matriz A usando o método dos mínimos quadrados
 
-    :param A: matriz de operador linear A.
+    :param A: matriz A.
     
     :param yo: vetor de autovetores iniciais.
     
@@ -621,7 +630,7 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
 
 
                 ac_Autovalor = polinomial(
-                    x=np.arange(i-10, i), y=autovls[-10:], pont=i)
+                    x=np.arange(i+pontos, i), y=autovls[+pontos:], pont=i)
                 ac_Autovls.append(ac_Autovalor)
 
             autovalor = np.linalg.norm(z)
@@ -640,9 +649,10 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        #ac_Autovls[-1] - autovalor_global) / np.abs(autovalor_global)
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    
 
                 # critério de parada da precisão
                 if erro < p:
@@ -652,5 +662,5 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
 
         i += 1
 
-    return [i, erro, autovalor]
+    return [i, erro, autovalor, autovls]
 

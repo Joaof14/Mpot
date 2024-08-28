@@ -1,0 +1,27 @@
+yo - estimativa inicial
+n = ponto inicial da aplicação da aceleração
+ac = tipo de aceleração usada
+m = numero de valores a ser utilizado no mmq
+
+
+função que executa o método das potencias(yo, n, ac, m):
+
+    loop até limite de iterações ou critério de parada
+        calcular z com base no y0
+
+        se iterações > 0 :
+            se iterações >= n e aceleração = aitken:
+
+                calcular autovalores aitken
+
+            senão:
+                calcular autovalores com mmq com os ultimos m autovalores
+
+
+        se iterações maior que 1 calcular erro:
+            erro = (autovalor_aceleracao - autovalor_aceleracao_anterior) / (autovalor_aceleracao_anterior)
+            resultado = autovalor erro menor que precisao
+
+
+
+        calcular y

@@ -1,4 +1,3 @@
-
 ### Descrição do Projeto
 
 Este projeto implementa o **Método da Potência** para calcular autovalores dominantes de uma matriz, e busca acelerar a convergência desse método utilizando técnicas baseadas no **Método dos Mínimos Quadrados (MMQ)**. O projeto inclui diversas tentativas de aceleração aplicadas ao Método da Potência, como Aitken e diferentes variações de MMQ (linear, logarítmica, exponencial, geométrica, etc.).
@@ -45,5 +44,4 @@ Richard L. Burden e J. Douglas Faires. Análise Numérica. 9ª ed. Cengage Learn
 
 Se você deseja contribuir para este projeto, sinta-se à vontade para abrir um pull request ou relatar problemas na seção de issues.
 
----
 

@@ -46,6 +46,4 @@ Richard L. Burden e J. Douglas Faires. Análise Numérica. 9ª ed. Cengage Learn
 
 Se você deseja contribuir para este projeto, sinta-se à vontade para abrir um pull request ou relatar problemas na seção de issues.
 
----
 
-Essa estrutura fornece uma boa base para documentar seu projeto, permitindo que outros desenvolvedores ou pesquisadores entendam o propósito e as funcionalidades do código que você desenvolveu.

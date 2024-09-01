@@ -1,4 +1,4 @@
-Para descrever o projeto no seu repositório GitHub, você pode seguir a estrutura abaixo. Certifique-se de adaptar o texto conforme necessário para refletir as particularidades e o contexto do seu projeto.
+
 
 ### Descrição do Projeto
 

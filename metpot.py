@@ -135,9 +135,9 @@ def Aitken(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:
@@ -218,9 +218,9 @@ def mp_mmq_linear(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:
@@ -304,9 +304,9 @@ def mp_mmq_logaritmo(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:
@@ -389,9 +389,9 @@ def mp_mmq_potencial(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:
@@ -474,9 +474,9 @@ def mp_mmq_exponencial(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:
@@ -557,9 +557,9 @@ def mp_mmq_geometrico(A, yo, maxit=10000,
                     erros.append(erro)
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:
@@ -642,9 +642,9 @@ def mp_mmq_polinomial(A, yo, maxit=10000,
                 
                 else:
                     erro = np.abs(
-                        ac_Autovls[-1] - autovls[-1]) / np.abs(ac_Autovls[-1])
+                        ac_Autovls[-1] - ac_Autovls[-2]) / np.abs(ac_Autovls[-2])
                     erros.append(erro)
-                    autovalor
+                    autovalor = ac_Autovalor
 
                 # critério de parada da precisão
                 if erro < p:

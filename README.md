@@ -37,7 +37,10 @@ print(f"Autovalor: {resultado[2]}, Erro: {resultado[1]}, Iterações: {resultado
 
 ### Referências
 
-Caso existam artigos, livros, ou outros recursos acadêmicos que foram utilizados como referência para a implementação dos métodos, este é o espaço para listá-los.
+FRANCO, N. M. B. Cálculo Numérico. 1. ed. São Paulo: Pearson, 2006. ISBN 8576050870.
+ARNALES, Selma; DAREZZO, Artur. Cálculo Numérico: Aprendizagem com Apoio de Software. 1. ed. Rio de Janeiro: Editora ABC, 2015.
+Richard L. Burden e J. Douglas Faires. Análise Numérica. 9ª ed. Cengage Learning, 2010.
+788 pp.
 
 ### Contribuições
 
@@ -45,4 +48,3 @@ Se você deseja contribuir para este projeto, sinta-se à vontade para abrir um 
 
 ---
 
-Essa estrutura fornece uma boa base para documentar seu projeto, permitindo que outros desenvolvedores ou pesquisadores entendam o propósito e as funcionalidades do código que você desenvolveu.

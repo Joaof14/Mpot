@@ -11,7 +11,7 @@ import pandas as pd
 #o inicio deve ser maior que a quantidade de pontos estimados
 inicio = 6
 quantidade = 5
-
+previsao_a_frente = 3
 
 
 
@@ -68,7 +68,7 @@ for slot in slots:
             coluna_acelera.append(acel)
             
             # Executa o método de aceleração e armazena os resultados
-            i, e, autovalor, autovls = metodo(A, yo, p=0.00001, inicio_acel=inicio, pontos = - quantidade)
+            i, e, autovalor, autovls = metodo(A, yo, p=0.00001, inicio_acel=inicio, pontos = - quantidade, prev = previsao_a_frente)
             coluna_ite.append(i)
             coluna_autovalor.append(autovalor)
             coluna_erro.append(e)
@@ -87,6 +87,6 @@ dados = {
 
 # Cria um DataFrame do Pandas com os dados
 df1 = pd.DataFrame(dados)
-estrategia = f"Inicio{inicio}-Ultimos{quantidade}"
+estrategia = f"Inicio{inicio}-Ultimos{quantidade}-prev{previsao_a_frente}"
 # Salva os resultados em um arquivo Excel
 df1.to_excel('resultados' + estrategia + '.xlsx')
